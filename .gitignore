@@ -16,4 +16,4 @@ package-lock.json
 scripts/
 public/
 web/
-fonts/
+/fonts/
