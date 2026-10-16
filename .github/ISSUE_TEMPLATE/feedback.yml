@@ -1,0 +1,26 @@
+name: Product feedback
+description: Suggest a change or report a usability issue using fictional or redacted examples.
+title: "[Feedback] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not include names, passport numbers, visa case numbers, account numbers, addresses, medical details, or other private information.
+  - type: textarea
+    id: observation
+    attributes:
+      label: What did you notice?
+      description: Describe the screen, prompt, calculation, or export behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What would improve it?
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: Safari on macOS, Chrome on Android, etc.
