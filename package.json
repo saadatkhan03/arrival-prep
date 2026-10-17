@@ -1,0 +1,10 @@
+{
+  "name": "visaready",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Account-based local VisaReady application; no static paid edition",
+  "scripts": {
+    "test": "node tests/test_backup.mjs && node tests/test_workspace.mjs"
+  },
+  "license": "UNLICENSED"
+}

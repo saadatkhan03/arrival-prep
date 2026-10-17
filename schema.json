@@ -1,13 +1,3093 @@
 [
-{"id":"case","title":"Your interview","question":"What did the consulate ask you to clarify?","hint":"Use the exact notice where possible. Do not include passport, visa case, Social Security or full account numbers.","fields":[["name","Applicant name or private alias","text"],["category","Visa category","text"],["post","Consular post","text"],["interview","Reinterview date, if known","date"],["notice","Notice date, cited section and requested evidence","textarea"],["asof","Facts current as of","date"]]},
-{"id":"household","title":"Household","question":"Who will move with you, and who depends on your support?","hint":"Include each household member, relationship, age and whether accompanying. Add a separate adult record later for every adult.","fields":[["members","Household members, ages, relationships and dependents remaining abroad","textarea"],["adults","Number of adults to assess","number"],["care","Childcare, schooling and other dependent-care plans","textarea"]]},
-{"id":"housing","title":"Residence & housing","question":"Where will you live when you arrive, and what supports that plan?","hint":"Distinguish a signed lease, a host's commitment and a location you are still considering.","fields":[["location","City, state, ZIP and county","text"],["arrival","Expected arrival date, if known","date"],["status","Housing status","select",["Undecided","Searching","Host arrangement","Signed lease","Owned home"]],["plan","Address or area, household capacity, duration and fallback","textarea"],["cost","Monthly housing cost (USD; use 0 only if confirmed free)","number"]]},
-{"id":"funds","title":"Liquid funds","question":"Which funds can your household actually access for settlement?","hint":"Add each account once. Use an alias, never an account number. Report your accessible share after joint ownership or restrictions; borrowed funds must also be disclosed as liabilities.","repeat":"accounts","fields":[["label","Account alias / institution","text"],["owner","Owner(s) and your share","text"],["balance","Balance in original currency","number"],["currency","Currency (three-letter code)","text"],["available","Accessible amount in that currency","number"],["rate","USD per 1 currency unit (USD = 1)","number"],["fxdate","Exchange-rate date","date"],["fxsource","Exchange-rate source (not automatically verified)","text"],["date","Balance date","date"],["restrictions","Transfer restrictions, recent deposits, borrowed funds or access delays","textarea"]]},
-{"id":"assets","title":"Assets & liabilities","question":"What other assets or obligations affect your settlement plan?","hint":"Do not count property, retirement funds or possible sales as liquid cash. Include debts, repayment schedules and ongoing support obligations.","fields":[["assets","Other assets: owner, currency, value, valuation date and evidence","textarea"],["debts","Liabilities: creditor alias, currency, amount, payment schedule and evidence","textarea"],["sale","Realization timing, sale costs and restrictions","textarea"]]},
-{"id":"work","title":"Work & qualifications","question":"How will this adult support the household after arrival?","hint":"Record each adult separately, including non-working adults. A job search is not an offer. A foreign degree does not itself establish a U.S. license.","repeat":"adults","fields":[["person","Adult name or alias","text"],["status","Employment status","select",["Unknown","Employed outside U.S.","Confirmed U.S. offer","Seeking work","Not planning to work"]],["employment","Current work, income/currency and whether it continues after relocation","textarea"],["search","U.S. employer/role, search activity or offer terms and start date","textarea"],["education","Education, qualifications and credential evidence","textarea"],["license","U.S. licensing requirements, status, costs and timeline","textarea"],["fallback","Funding and alternative plan until work begins","textarea"]]},
-{"id":"support","title":"Family & sponsor support","question":"Who, if anyone, has committed to supporting your household?","hint":"Record promises separately from funds already available. Do not assume that a formal affidavit is required or sufficient; follow the consulate's category-specific instructions.","fields":[["status","Support status","select",["Unknown","No support relied on","Informal discussion","Written commitment","Formal affidavit available"]],["details","Supporter, relationship, type/amount/currency, duration and conditions","textarea"],["capacity","Evidence of capacity and any requested affidavit / applicability review","textarea"]]},
-{"id":"insurance","title":"Health & insurance","question":"How will every family member's health costs be covered?","hint":"A request for a quote is not a quote; a quote is not active coverage. You may describe care costs without listing diagnoses.","fields":[["status","Insurance status","select",["Unknown","Inquiry sent; quote pending","Written quote received","Enrollment pending","Active coverage"]],["plan","Carrier / plan, covered members, geographic network and coverage type","textarea"],["premium","Monthly family premium (USD)","number"],["terms","Deductible, out-of-pocket maximum, exclusions and subsidy assumptions","textarea"],["dates","Quote date/expiry, proposed effective date and enrollment conditions","textarea"],["care","Anticipated care costs, coverage gap and how those costs will be funded","textarea"]]},
-{"id":"budget","title":"Settlement budget","question":"What will arrival and a typical month cost?","hint":"Enter USD estimates and their basis. Blank means unknown, not zero. Insurance and housing are entered here too; check consistency with the preceding sections. Income is excluded from the conservative runway calculation.","fields":[["rent","Monthly housing","number"],["utilities","Monthly utilities / phone","number"],["food","Monthly food","number"],["transport","Monthly transport","number"],["insurance","Monthly insurance premium","number"],["health","Monthly out-of-pocket health reserve","number"],["care","Monthly childcare / education","number"],["debt","Monthly debt and other support obligations","number"],["other","Other monthly costs","number"],["arrival","One-time travel, deposits, furnishings and fees","number"],["reserve","Protected emergency reserve","number"],["basis","Estimate dates, sources, exclusions and contingencies","textarea"]]},
-{"id":"benefits","title":"Benefits history","question":"Is there any U.S. public-benefits history relevant to the consulate's questions?","hint":"Answer accurately; do not stop or avoid needed benefits based on this tool. Treatment can depend on the program, recipient and circumstances. Seek qualified advice for interpretation.","fields":[["status","History to report","select",["Unknown / need advice","None reported by applicant","History to describe"]],["details","Recipient, program, agency, dates, amount, circumstances and records; or questions for counsel","textarea"]]},
-{"id":"evidence","title":"Evidence index","question":"Which documents support the facts you have entered?","hint":"Keep originals outside the app. This is an index, not an upload or authenticity check. References can be a filename, exhibit or page range. Never describe a missing document as available.","repeat":"evidence","fields":[["id","Unique evidence ID, e.g. E01","text"],["title","Document title / issuer","text"],["date","Document date","date"],["status","Availability","select",["Missing","Requested","Available","Needs translation","Expired / needs update"]],["supports","Facts supported and page / file reference","textarea"]]}
+  {
+    "id": "case",
+    "title": "About you",
+    "question": "Let’s start with a few simple details.",
+    "hint": "You can start now, even if you do not have an interview date. Choose the visa code on your paperwork, or choose “I am not sure”. This helps organize your summary; it does not decide which rules apply to you.",
+    "fields": [
+      [
+        "name",
+        "Your name or nickname",
+        "text",
+        "",
+        "You can use a nickname here. Write your full legal name on the printed document.",
+        null
+      ],
+      [
+        "category",
+        "Your visa type",
+        "select",
+        [
+          "IR1 — Spouse of a U.S. citizen",
+          "CR1 — Spouse of a U.S. citizen; conditional residence",
+          "IR2 — Child of a U.S. citizen",
+          "CR2 — Child of a U.S. citizen; conditional residence",
+          "IR3 — Child adopted abroad; orphan category",
+          "IR4 — Child coming to the U.S. for adoption; orphan category",
+          "IH3 — Child adopted abroad; Hague adoption",
+          "IH4 — Child coming for adoption; Hague adoption",
+          "IR5 — Parent of an adult U.S. citizen",
+          "IW1 — Widow or widower of a U.S. citizen",
+          "IW2 — Child of an IW1 applicant",
+          "IB1 — Self-petitioning spouse of a U.S. citizen",
+          "IB2 — Self-petitioning child of a U.S. citizen",
+          "IB3 — Child of an IB1 applicant",
+          "VI5 — Parent under the Virgin Islands adjustment provision",
+          "F11 — F1: unmarried adult child of a U.S. citizen",
+          "F12 — Child of an F11 applicant",
+          "B11 — Self-petitioning unmarried adult child of a U.S. citizen",
+          "B12 — Child of a B11 applicant",
+          "F21 — F2A: spouse of a permanent resident",
+          "F22 — F2A: child of a permanent resident",
+          "F23 — Child of an F21 or F22 applicant",
+          "F24 — F2B: unmarried adult child of a permanent resident",
+          "F25 — Child of an F24 applicant",
+          "C21 — Spouse of a permanent resident; conditional",
+          "C22 — Child of a permanent resident; conditional",
+          "C23 — Child of a C21 or C22 applicant; conditional",
+          "C24 — Unmarried adult child of a permanent resident; conditional",
+          "C25 — Child in the C24 family route; conditional",
+          "B21 — Self-petitioning spouse of a permanent resident",
+          "B22 — Self-petitioning child of a permanent resident",
+          "B23 — Child of a B21 or B22 applicant",
+          "B24 — Self-petitioning unmarried adult child of a permanent resident",
+          "B25 — Child of a B24 applicant",
+          "FX1 — Spouse of a permanent resident; country-limit exempt",
+          "FX2 — Child of a permanent resident; country-limit exempt",
+          "FX3 — Child of an FX1 or FX2 applicant",
+          "CX1 — Conditional spouse; country-limit exempt",
+          "CX2 — Conditional child; country-limit exempt",
+          "CX3 — Child of a CX1 or CX2 applicant",
+          "BX1 — Self-petitioning spouse; country-limit exempt",
+          "BX2 — Self-petitioning child; country-limit exempt",
+          "BX3 — Child of a BX1 or BX2 applicant",
+          "F31 — F3: married adult child of a U.S. citizen",
+          "F32 — Spouse of an F31 applicant",
+          "F33 — Child of an F31 applicant",
+          "C31 — Married adult child of a U.S. citizen; conditional",
+          "C32 — Spouse of a C31 applicant; conditional",
+          "C33 — Child of a C31 applicant; conditional",
+          "B31 — Self-petitioning married adult child of a U.S. citizen",
+          "B32 — Spouse of a B31 applicant",
+          "B33 — Child of a B31 applicant",
+          "F41 — F4: sibling of an adult U.S. citizen",
+          "F42 — Spouse of an F41 applicant",
+          "F43 — Child of an F41 applicant",
+          "E11 / EB-1A — Extraordinary ability",
+          "E12 / EB-1B — Outstanding professor or researcher",
+          "E13 / EB-1C — Multinational manager or executive",
+          "E14 — Spouse of an EB-1 applicant",
+          "E15 — Child of an EB-1 applicant",
+          "E21 / EB-2 — Advanced degree or exceptional ability",
+          "E21 / EB-2 NIW — National Interest Waiver",
+          "E22 — Spouse of an EB-2 applicant",
+          "E23 — Child of an EB-2 applicant",
+          "E31 / EB-3 — Skilled worker",
+          "E32 / EB-3 — Professional",
+          "E34 — Spouse of an E31 or E32 applicant",
+          "E35 — Child of an E31 or E32 applicant",
+          "EW3 / EB-3 — Other worker",
+          "EW4 — Spouse of an EW3 applicant",
+          "EW5 — Child of an EW3 applicant",
+          "C51 — EB-5: investment outside targeted areas",
+          "C52 — Spouse of C51 applicant",
+          "C53 — Child of C51 applicant",
+          "T51 — EB-5: investment in targeted areas",
+          "T52 — Spouse of T51 applicant",
+          "T53 — Child of T51 applicant",
+          "R51 — EB-5: regional-center investment outside targeted areas (legacy code)",
+          "R52 — Spouse of R51 applicant",
+          "R53 — Child of R51 applicant",
+          "I51 — EB-5: regional-center investment in targeted areas (legacy code)",
+          "I52 — Spouse of I51 applicant",
+          "I53 — Child of I51 applicant",
+          "NU1 — EB-5: direct investment, unreserved",
+          "NU2 — Spouse of NU1 applicant",
+          "NU3 — Child of NU1 applicant",
+          "RU1 — EB-5: regional-center investment, unreserved",
+          "RU2 — Spouse of RU1 applicant",
+          "RU3 — Child of RU1 applicant",
+          "NR1 — EB-5: direct investment, rural",
+          "NR2 — Spouse of NR1 applicant",
+          "NR3 — Child of NR1 applicant",
+          "NH1 — EB-5: direct investment, high-unemployment",
+          "NH2 — Spouse of NH1 applicant",
+          "NH3 — Child of NH1 applicant",
+          "RR1 — EB-5: regional-center investment, rural",
+          "RR2 — Spouse of RR1 applicant",
+          "RR3 — Child of RR1 applicant",
+          "RH1 — EB-5: regional-center investment, high-unemployment",
+          "RH2 — Spouse of RH1 applicant",
+          "RH3 — Child of RH1 applicant",
+          "RI1 — EB-5: regional-center investment, infrastructure",
+          "RI2 — Spouse of RI1 applicant",
+          "RI3 — Child of RI1 applicant",
+          "GV1 — U.S. government employee abroad",
+          "GV2 — Spouse of GV1 applicant",
+          "GV3 — Child of GV1 applicant",
+          "SI1 — Iraq / Afghanistan translator or interpreter",
+          "SI2 — Spouse of SI1 applicant",
+          "SI3 — Child of SI1 applicant",
+          "SQ1 — Qualifying Iraqi / Afghan U.S. government employee",
+          "SQ2 — Spouse of SQ1 applicant",
+          "SQ3 — Child of SQ1 applicant",
+          "SM1 — Qualifying U.S. armed-forces member",
+          "SM2 — Spouse of SM1 applicant",
+          "SM3 — Child of SM1 applicant",
+          "BC1 — Qualifying broadcaster",
+          "BC2 — Spouse of BC1 applicant",
+          "BC3 — Child of BC1 applicant",
+          "SD1 — Minister of religion",
+          "SD2 — Spouse of SD1 applicant",
+          "SD3 — Child of SD1 applicant",
+          "SE1 — Qualifying U.S. government employee abroad (legacy code)",
+          "SE2 — Spouse of SE1 applicant",
+          "SE3 — Child of SE1 applicant",
+          "SR1 — Qualifying religious worker",
+          "SR2 — Spouse of SR1 applicant",
+          "SR3 — Child of SR1 applicant",
+          "GS1 — Surviving spouse or child of a qualifying government employee",
+          "SS1 — Surviving spouse or child of a qualifying government employee (legacy code)",
+          "SB1 — Returning permanent resident",
+          "SC1 — Former U.S. citizen: marriage provision",
+          "SC2 — Former U.S. citizen: armed-forces provision",
+          "SF1 — Qualifying former Panama Canal employee",
+          "SF2 — Spouse or child of an SF1 applicant",
+          "SG1 — Qualifying former government employee in the Canal Zone",
+          "SG2 — Spouse or child of an SG1 applicant",
+          "SH1 — Qualifying former Canal employee on April 1, 1979",
+          "SH2 — Spouse or child of an SH1 applicant",
+          "SJ1 — Qualifying foreign medical graduate",
+          "SJ2 — Spouse or child of an SJ1 applicant",
+          "SK1 — Retired international-organization employee",
+          "SK2 — Spouse of an SK1 applicant",
+          "SK3 — Qualifying child of an international-organization employee",
+          "SK4 — Qualifying surviving spouse of an international-organization employee",
+          "SL1 — Special immigrant juvenile",
+          "SN1 — Retired NATO civilian employee",
+          "SN2 — Spouse of an SN1 applicant",
+          "SN3 — Qualifying child of a NATO civilian employee",
+          "SN4 — Qualifying surviving spouse of a NATO civilian employee",
+          "SU2 — Qualifying spouse of a U1 recipient",
+          "SU3 — Qualifying child of a U1 recipient",
+          "SU5 — Qualifying parent of a U1 recipient",
+          "AM1 — Vietnam Amerasian applicant",
+          "AM2 — Spouse or child of an AM1 applicant",
+          "AM3 — Qualifying parent or family member of an AM1 applicant",
+          "DV1 — Diversity Visa selected applicant",
+          "DV2 — Spouse of a Diversity Visa applicant",
+          "DV3 — Child of a Diversity Visa applicant",
+          "I am not sure"
+        ],
+        "Look for a code such as IR1, CR1, E11 or E21 on your visa paperwork.",
+        {
+          "options": [
+            "IR1 — Spouse of a U.S. citizen",
+            "CR1 — Spouse of a U.S. citizen; conditional residence",
+            "IR2 — Child of a U.S. citizen",
+            "CR2 — Child of a U.S. citizen; conditional residence",
+            "IR3 — Child adopted abroad; orphan category",
+            "IR4 — Child coming to the U.S. for adoption; orphan category",
+            "IH3 — Child adopted abroad; Hague adoption",
+            "IH4 — Child coming for adoption; Hague adoption",
+            "IR5 — Parent of an adult U.S. citizen",
+            "IW1 — Widow or widower of a U.S. citizen",
+            "IW2 — Child of an IW1 applicant",
+            "IB1 — Self-petitioning spouse of a U.S. citizen",
+            "IB2 — Self-petitioning child of a U.S. citizen",
+            "IB3 — Child of an IB1 applicant",
+            "VI5 — Parent under the Virgin Islands adjustment provision",
+            "F11 — F1: unmarried adult child of a U.S. citizen",
+            "F12 — Child of an F11 applicant",
+            "B11 — Self-petitioning unmarried adult child of a U.S. citizen",
+            "B12 — Child of a B11 applicant",
+            "F21 — F2A: spouse of a permanent resident",
+            "F22 — F2A: child of a permanent resident",
+            "F23 — Child of an F21 or F22 applicant",
+            "F24 — F2B: unmarried adult child of a permanent resident",
+            "F25 — Child of an F24 applicant",
+            "C21 — Spouse of a permanent resident; conditional",
+            "C22 — Child of a permanent resident; conditional",
+            "C23 — Child of a C21 or C22 applicant; conditional",
+            "C24 — Unmarried adult child of a permanent resident; conditional",
+            "C25 — Child in the C24 family route; conditional",
+            "B21 — Self-petitioning spouse of a permanent resident",
+            "B22 — Self-petitioning child of a permanent resident",
+            "B23 — Child of a B21 or B22 applicant",
+            "B24 — Self-petitioning unmarried adult child of a permanent resident",
+            "B25 — Child of a B24 applicant",
+            "FX1 — Spouse of a permanent resident; country-limit exempt",
+            "FX2 — Child of a permanent resident; country-limit exempt",
+            "FX3 — Child of an FX1 or FX2 applicant",
+            "CX1 — Conditional spouse; country-limit exempt",
+            "CX2 — Conditional child; country-limit exempt",
+            "CX3 — Child of a CX1 or CX2 applicant",
+            "BX1 — Self-petitioning spouse; country-limit exempt",
+            "BX2 — Self-petitioning child; country-limit exempt",
+            "BX3 — Child of a BX1 or BX2 applicant",
+            "F31 — F3: married adult child of a U.S. citizen",
+            "F32 — Spouse of an F31 applicant",
+            "F33 — Child of an F31 applicant",
+            "C31 — Married adult child of a U.S. citizen; conditional",
+            "C32 — Spouse of a C31 applicant; conditional",
+            "C33 — Child of a C31 applicant; conditional",
+            "B31 — Self-petitioning married adult child of a U.S. citizen",
+            "B32 — Spouse of a B31 applicant",
+            "B33 — Child of a B31 applicant",
+            "F41 — F4: sibling of an adult U.S. citizen",
+            "F42 — Spouse of an F41 applicant",
+            "F43 — Child of an F41 applicant",
+            "E11 / EB-1A — Extraordinary ability",
+            "E12 / EB-1B — Outstanding professor or researcher",
+            "E13 / EB-1C — Multinational manager or executive",
+            "E14 — Spouse of an EB-1 applicant",
+            "E15 — Child of an EB-1 applicant",
+            "E21 / EB-2 — Advanced degree or exceptional ability",
+            "E21 / EB-2 NIW — National Interest Waiver",
+            "E22 — Spouse of an EB-2 applicant",
+            "E23 — Child of an EB-2 applicant",
+            "E31 / EB-3 — Skilled worker",
+            "E32 / EB-3 — Professional",
+            "E34 — Spouse of an E31 or E32 applicant",
+            "E35 — Child of an E31 or E32 applicant",
+            "EW3 / EB-3 — Other worker",
+            "EW4 — Spouse of an EW3 applicant",
+            "EW5 — Child of an EW3 applicant",
+            "C51 — EB-5: investment outside targeted areas",
+            "C52 — Spouse of C51 applicant",
+            "C53 — Child of C51 applicant",
+            "T51 — EB-5: investment in targeted areas",
+            "T52 — Spouse of T51 applicant",
+            "T53 — Child of T51 applicant",
+            "R51 — EB-5: regional-center investment outside targeted areas (legacy code)",
+            "R52 — Spouse of R51 applicant",
+            "R53 — Child of R51 applicant",
+            "I51 — EB-5: regional-center investment in targeted areas (legacy code)",
+            "I52 — Spouse of I51 applicant",
+            "I53 — Child of I51 applicant",
+            "NU1 — EB-5: direct investment, unreserved",
+            "NU2 — Spouse of NU1 applicant",
+            "NU3 — Child of NU1 applicant",
+            "RU1 — EB-5: regional-center investment, unreserved",
+            "RU2 — Spouse of RU1 applicant",
+            "RU3 — Child of RU1 applicant",
+            "NR1 — EB-5: direct investment, rural",
+            "NR2 — Spouse of NR1 applicant",
+            "NR3 — Child of NR1 applicant",
+            "NH1 — EB-5: direct investment, high-unemployment",
+            "NH2 — Spouse of NH1 applicant",
+            "NH3 — Child of NH1 applicant",
+            "RR1 — EB-5: regional-center investment, rural",
+            "RR2 — Spouse of RR1 applicant",
+            "RR3 — Child of RR1 applicant",
+            "RH1 — EB-5: regional-center investment, high-unemployment",
+            "RH2 — Spouse of RH1 applicant",
+            "RH3 — Child of RH1 applicant",
+            "RI1 — EB-5: regional-center investment, infrastructure",
+            "RI2 — Spouse of RI1 applicant",
+            "RI3 — Child of RI1 applicant",
+            "GV1 — U.S. government employee abroad",
+            "GV2 — Spouse of GV1 applicant",
+            "GV3 — Child of GV1 applicant",
+            "SI1 — Iraq / Afghanistan translator or interpreter",
+            "SI2 — Spouse of SI1 applicant",
+            "SI3 — Child of SI1 applicant",
+            "SQ1 — Qualifying Iraqi / Afghan U.S. government employee",
+            "SQ2 — Spouse of SQ1 applicant",
+            "SQ3 — Child of SQ1 applicant",
+            "SM1 — Qualifying U.S. armed-forces member",
+            "SM2 — Spouse of SM1 applicant",
+            "SM3 — Child of SM1 applicant",
+            "BC1 — Qualifying broadcaster",
+            "BC2 — Spouse of BC1 applicant",
+            "BC3 — Child of BC1 applicant",
+            "SD1 — Minister of religion",
+            "SD2 — Spouse of SD1 applicant",
+            "SD3 — Child of SD1 applicant",
+            "SE1 — Qualifying U.S. government employee abroad (legacy code)",
+            "SE2 — Spouse of SE1 applicant",
+            "SE3 — Child of SE1 applicant",
+            "SR1 — Qualifying religious worker",
+            "SR2 — Spouse of SR1 applicant",
+            "SR3 — Child of SR1 applicant",
+            "GS1 — Surviving spouse or child of a qualifying government employee",
+            "SS1 — Surviving spouse or child of a qualifying government employee (legacy code)",
+            "SB1 — Returning permanent resident",
+            "SC1 — Former U.S. citizen: marriage provision",
+            "SC2 — Former U.S. citizen: armed-forces provision",
+            "SF1 — Qualifying former Panama Canal employee",
+            "SF2 — Spouse or child of an SF1 applicant",
+            "SG1 — Qualifying former government employee in the Canal Zone",
+            "SG2 — Spouse or child of an SG1 applicant",
+            "SH1 — Qualifying former Canal employee on April 1, 1979",
+            "SH2 — Spouse or child of an SH1 applicant",
+            "SJ1 — Qualifying foreign medical graduate",
+            "SJ2 — Spouse or child of an SJ1 applicant",
+            "SK1 — Retired international-organization employee",
+            "SK2 — Spouse of an SK1 applicant",
+            "SK3 — Qualifying child of an international-organization employee",
+            "SK4 — Qualifying surviving spouse of an international-organization employee",
+            "SL1 — Special immigrant juvenile",
+            "SN1 — Retired NATO civilian employee",
+            "SN2 — Spouse of an SN1 applicant",
+            "SN3 — Qualifying child of a NATO civilian employee",
+            "SN4 — Qualifying surviving spouse of a NATO civilian employee",
+            "SU2 — Qualifying spouse of a U1 recipient",
+            "SU3 — Qualifying child of a U1 recipient",
+            "SU5 — Qualifying parent of a U1 recipient",
+            "AM1 — Vietnam Amerasian applicant",
+            "AM2 — Spouse or child of an AM1 applicant",
+            "AM3 — Qualifying parent or family member of an AM1 applicant",
+            "DV1 — Diversity Visa selected applicant",
+            "DV2 — Spouse of a Diversity Visa applicant",
+            "DV3 — Child of a Diversity Visa applicant",
+            "I am not sure"
+          ],
+          "groups": {
+            "Family: spouse, children and parents": [
+              "IR1 — Spouse of a U.S. citizen",
+              "CR1 — Spouse of a U.S. citizen; conditional residence",
+              "IR2 — Child of a U.S. citizen",
+              "CR2 — Child of a U.S. citizen; conditional residence",
+              "IR3 — Child adopted abroad; orphan category",
+              "IR4 — Child coming to the U.S. for adoption; orphan category",
+              "IH3 — Child adopted abroad; Hague adoption",
+              "IH4 — Child coming for adoption; Hague adoption",
+              "IR5 — Parent of an adult U.S. citizen",
+              "IW1 — Widow or widower of a U.S. citizen",
+              "IW2 — Child of an IW1 applicant",
+              "IB1 — Self-petitioning spouse of a U.S. citizen",
+              "IB2 — Self-petitioning child of a U.S. citizen",
+              "IB3 — Child of an IB1 applicant",
+              "VI5 — Parent under the Virgin Islands adjustment provision"
+            ],
+            "Family: other relatives": [
+              "F11 — F1: unmarried adult child of a U.S. citizen",
+              "F12 — Child of an F11 applicant",
+              "B11 — Self-petitioning unmarried adult child of a U.S. citizen",
+              "B12 — Child of a B11 applicant",
+              "F21 — F2A: spouse of a permanent resident",
+              "F22 — F2A: child of a permanent resident",
+              "F23 — Child of an F21 or F22 applicant",
+              "F24 — F2B: unmarried adult child of a permanent resident",
+              "F25 — Child of an F24 applicant",
+              "C21 — Spouse of a permanent resident; conditional",
+              "C22 — Child of a permanent resident; conditional",
+              "C23 — Child of a C21 or C22 applicant; conditional",
+              "C24 — Unmarried adult child of a permanent resident; conditional",
+              "C25 — Child in the C24 family route; conditional",
+              "B21 — Self-petitioning spouse of a permanent resident",
+              "B22 — Self-petitioning child of a permanent resident",
+              "B23 — Child of a B21 or B22 applicant",
+              "B24 — Self-petitioning unmarried adult child of a permanent resident",
+              "B25 — Child of a B24 applicant",
+              "FX1 — Spouse of a permanent resident; country-limit exempt",
+              "FX2 — Child of a permanent resident; country-limit exempt",
+              "FX3 — Child of an FX1 or FX2 applicant",
+              "CX1 — Conditional spouse; country-limit exempt",
+              "CX2 — Conditional child; country-limit exempt",
+              "CX3 — Child of a CX1 or CX2 applicant",
+              "BX1 — Self-petitioning spouse; country-limit exempt",
+              "BX2 — Self-petitioning child; country-limit exempt",
+              "BX3 — Child of a BX1 or BX2 applicant",
+              "F31 — F3: married adult child of a U.S. citizen",
+              "F32 — Spouse of an F31 applicant",
+              "F33 — Child of an F31 applicant",
+              "C31 — Married adult child of a U.S. citizen; conditional",
+              "C32 — Spouse of a C31 applicant; conditional",
+              "C33 — Child of a C31 applicant; conditional",
+              "B31 — Self-petitioning married adult child of a U.S. citizen",
+              "B32 — Spouse of a B31 applicant",
+              "B33 — Child of a B31 applicant",
+              "F41 — F4: sibling of an adult U.S. citizen",
+              "F42 — Spouse of an F41 applicant",
+              "F43 — Child of an F41 applicant"
+            ],
+            "Work: EB-1, EB-2 and EB-3": [
+              "E11 / EB-1A — Extraordinary ability",
+              "E12 / EB-1B — Outstanding professor or researcher",
+              "E13 / EB-1C — Multinational manager or executive",
+              "E14 — Spouse of an EB-1 applicant",
+              "E15 — Child of an EB-1 applicant",
+              "E21 / EB-2 — Advanced degree or exceptional ability",
+              "E21 / EB-2 NIW — National Interest Waiver",
+              "E22 — Spouse of an EB-2 applicant",
+              "E23 — Child of an EB-2 applicant",
+              "E31 / EB-3 — Skilled worker",
+              "E32 / EB-3 — Professional",
+              "E34 — Spouse of an E31 or E32 applicant",
+              "E35 — Child of an E31 or E32 applicant",
+              "EW3 / EB-3 — Other worker",
+              "EW4 — Spouse of an EW3 applicant",
+              "EW5 — Child of an EW3 applicant"
+            ],
+            "Investors: EB-5": [
+              "C51 — EB-5: investment outside targeted areas",
+              "C52 — Spouse of C51 applicant",
+              "C53 — Child of C51 applicant",
+              "T51 — EB-5: investment in targeted areas",
+              "T52 — Spouse of T51 applicant",
+              "T53 — Child of T51 applicant",
+              "R51 — EB-5: regional-center investment outside targeted areas (legacy code)",
+              "R52 — Spouse of R51 applicant",
+              "R53 — Child of R51 applicant",
+              "I51 — EB-5: regional-center investment in targeted areas (legacy code)",
+              "I52 — Spouse of I51 applicant",
+              "I53 — Child of I51 applicant",
+              "NU1 — EB-5: direct investment, unreserved",
+              "NU2 — Spouse of NU1 applicant",
+              "NU3 — Child of NU1 applicant",
+              "RU1 — EB-5: regional-center investment, unreserved",
+              "RU2 — Spouse of RU1 applicant",
+              "RU3 — Child of RU1 applicant",
+              "NR1 — EB-5: direct investment, rural",
+              "NR2 — Spouse of NR1 applicant",
+              "NR3 — Child of NR1 applicant",
+              "NH1 — EB-5: direct investment, high-unemployment",
+              "NH2 — Spouse of NH1 applicant",
+              "NH3 — Child of NH1 applicant",
+              "RR1 — EB-5: regional-center investment, rural",
+              "RR2 — Spouse of RR1 applicant",
+              "RR3 — Child of RR1 applicant",
+              "RH1 — EB-5: regional-center investment, high-unemployment",
+              "RH2 — Spouse of RH1 applicant",
+              "RH3 — Child of RH1 applicant",
+              "RI1 — EB-5: regional-center investment, infrastructure",
+              "RI2 — Spouse of RI1 applicant",
+              "RI3 — Child of RI1 applicant"
+            ],
+            "Special and other immigrant visas": [
+              "GV1 — U.S. government employee abroad",
+              "GV2 — Spouse of GV1 applicant",
+              "GV3 — Child of GV1 applicant",
+              "SI1 — Iraq / Afghanistan translator or interpreter",
+              "SI2 — Spouse of SI1 applicant",
+              "SI3 — Child of SI1 applicant",
+              "SQ1 — Qualifying Iraqi / Afghan U.S. government employee",
+              "SQ2 — Spouse of SQ1 applicant",
+              "SQ3 — Child of SQ1 applicant",
+              "SM1 — Qualifying U.S. armed-forces member",
+              "SM2 — Spouse of SM1 applicant",
+              "SM3 — Child of SM1 applicant",
+              "BC1 — Qualifying broadcaster",
+              "BC2 — Spouse of BC1 applicant",
+              "BC3 — Child of BC1 applicant",
+              "SD1 — Minister of religion",
+              "SD2 — Spouse of SD1 applicant",
+              "SD3 — Child of SD1 applicant",
+              "SE1 — Qualifying U.S. government employee abroad (legacy code)",
+              "SE2 — Spouse of SE1 applicant",
+              "SE3 — Child of SE1 applicant",
+              "SR1 — Qualifying religious worker",
+              "SR2 — Spouse of SR1 applicant",
+              "SR3 — Child of SR1 applicant",
+              "GS1 — Surviving spouse or child of a qualifying government employee",
+              "SS1 — Surviving spouse or child of a qualifying government employee (legacy code)",
+              "SB1 — Returning permanent resident",
+              "SC1 — Former U.S. citizen: marriage provision",
+              "SC2 — Former U.S. citizen: armed-forces provision",
+              "SF1 — Qualifying former Panama Canal employee",
+              "SF2 — Spouse or child of an SF1 applicant",
+              "SG1 — Qualifying former government employee in the Canal Zone",
+              "SG2 — Spouse or child of an SG1 applicant",
+              "SH1 — Qualifying former Canal employee on April 1, 1979",
+              "SH2 — Spouse or child of an SH1 applicant",
+              "SJ1 — Qualifying foreign medical graduate",
+              "SJ2 — Spouse or child of an SJ1 applicant",
+              "SK1 — Retired international-organization employee",
+              "SK2 — Spouse of an SK1 applicant",
+              "SK3 — Qualifying child of an international-organization employee",
+              "SK4 — Qualifying surviving spouse of an international-organization employee",
+              "SL1 — Special immigrant juvenile",
+              "SN1 — Retired NATO civilian employee",
+              "SN2 — Spouse of an SN1 applicant",
+              "SN3 — Qualifying child of a NATO civilian employee",
+              "SN4 — Qualifying surviving spouse of a NATO civilian employee",
+              "SU2 — Qualifying spouse of a U1 recipient",
+              "SU3 — Qualifying child of a U1 recipient",
+              "SU5 — Qualifying parent of a U1 recipient",
+              "AM1 — Vietnam Amerasian applicant",
+              "AM2 — Spouse or child of an AM1 applicant",
+              "AM3 — Qualifying parent or family member of an AM1 applicant"
+            ],
+            "Diversity Visa": [
+              "DV1 — Diversity Visa selected applicant",
+              "DV2 — Spouse of a Diversity Visa applicant",
+              "DV3 — Child of a Diversity Visa applicant"
+            ]
+          },
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "stage",
+        "Where are you in the process?",
+        "select",
+        [
+          "Preparing before my first interview",
+          "Waiting for another interview",
+          "Updating documents after an interview",
+          "Not sure"
+        ],
+        "No interview date is needed.",
+        {
+          "options": [
+            "Preparing before my first interview",
+            "Waiting for another interview",
+            "Updating documents after an interview",
+            "Not sure"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "post",
+        "Your U.S. embassy or consulate (optional)",
+        "text",
+        "",
+        "It is okay if you have not been assigned an embassy yet.",
+        {
+          "options": [
+            "Islamabad, Pakistan",
+            "Karachi, Pakistan",
+            "Dhaka, Bangladesh",
+            "Mumbai, India",
+            "New Delhi, India",
+            "Guangzhou, China",
+            "Manila, Philippines",
+            "Abu Dhabi, UAE",
+            "Riyadh, Saudi Arabia",
+            "London, United Kingdom",
+            "Montreal, Canada",
+            "Ankara, Türkiye",
+            "Accra, Ghana",
+            "Lagos, Nigeria",
+            "Nairobi, Kenya",
+            "Not yet assigned / not sure"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "interview",
+        "Interview date (optional)",
+        "date",
+        "",
+        "Leave blank if you do not know. This can be your first interview or a follow-up.",
+        {
+          "advanced": true
+        }
+      ],
+      [
+        "notice",
+        "Extra embassy instructions (optional)",
+        "textarea",
+        "",
+        "Only if you want to record a specific embassy request. It is not needed to use this app.",
+        {
+          "parts": [
+            {
+              "key": "request",
+              "label": "What were you asked to provide?",
+              "type": "choice",
+              "options": [
+                "Financial resources / bank evidence",
+                "Employment / job-search evidence",
+                "Sponsor / family support evidence",
+                "Health insurance / medical-cost plan",
+                "Housing / settlement plan",
+                "Several public-charge documents",
+                "The notice is unclear"
+              ]
+            },
+            {
+              "key": "section",
+              "label": "Notice label",
+              "type": "choice",
+              "options": [
+                "221(g)",
+                "212(a)(4)",
+                "No section stated",
+                "Not sure"
+              ]
+            },
+            {
+              "key": "date",
+              "label": "Notice date",
+              "type": "date"
+            },
+            {
+              "key": "detail",
+              "label": "Exact request or extra detail (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": true,
+          "maxRows": 10,
+          "advanced": true
+        }
+      ],
+      [
+        "asof",
+        "Information last checked (optional)",
+        "date",
+        "",
+        "Optional: when you last checked these answers. Bank and quote dates are recorded separately.",
+        {
+          "advanced": true
+        }
+      ]
+    ]
+  },
+  {
+    "id": "household",
+    "title": "Your family",
+    "question": "Who is moving with you?",
+    "hint": "Add one row for each person. Use nicknames if you prefer. Include people you support who will stay outside the U.S.",
+    "fields": [
+      [
+        "members",
+        "People in your family",
+        "textarea",
+        "",
+        "Household members, ages, relationships and dependents remaining abroad",
+        {
+          "parts": [
+            {
+              "key": "alias",
+              "label": "Alias",
+              "type": "text",
+              "hint": "Person alias"
+            },
+            {
+              "key": "relationship",
+              "label": "Relationship",
+              "type": "choice",
+              "options": [
+                "Applicant",
+                "Spouse / partner",
+                "Child",
+                "Parent",
+                "Sibling",
+                "Other dependent"
+              ]
+            },
+            {
+              "key": "age",
+              "label": "Age (years)",
+              "type": "number",
+              "hint": "Age in years"
+            },
+            {
+              "key": "move",
+              "label": "Moving to U.S.?",
+              "type": "choice",
+              "options": [
+                "Accompanying now",
+                "Following later",
+                "Remaining abroad",
+                "Not yet decided",
+                "Already living in the U.S."
+              ],
+              "hint": "Moving to the U.S.?"
+            },
+            {
+              "key": "support",
+              "label": "Dependent?",
+              "type": "choice",
+              "options": [
+                "Yes",
+                "No",
+                "Partly",
+                "Not yet known"
+              ],
+              "hint": "Financially dependent?"
+            }
+          ],
+          "rows": true,
+          "maxRows": 10
+        }
+      ],
+      [
+        "adults",
+        "Number of adults",
+        "number",
+        "",
+        "Number of adults to assess",
+        {
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "care",
+        "Care for children or other dependents",
+        "textarea",
+        "",
+        "Childcare, schooling and other dependent-care plans",
+        {
+          "parts": [
+            {
+              "key": "person",
+              "label": "Person needing care (alias)",
+              "type": "text"
+            },
+            {
+              "key": "type",
+              "label": "Care",
+              "type": "choice",
+              "options": [
+                "No dependent care needed",
+                "Parent / household member provides care",
+                "School",
+                "Licensed childcare",
+                "Family / friend provides care",
+                "Paid home care",
+                "Still arranging care"
+              ],
+              "hint": "Care arrangement"
+            },
+            {
+              "key": "status",
+              "label": "Care status",
+              "type": "choice",
+              "options": [
+                "Confirmed",
+                "Searching / applying",
+                "Planning estimate",
+                "Not yet known"
+              ],
+              "hint": "Arrangement status"
+            },
+            {
+              "key": "detail",
+              "label": "Care notes",
+              "type": "text",
+              "hint": "Timing or extra detail (optional)"
+            }
+          ],
+          "rows": true,
+          "maxRows": 10
+        }
+      ]
+    ]
+  },
+  {
+    "id": "housing",
+    "title": "Your U.S. home",
+    "question": "Where do you plan to live in the U.S.?",
+    "hint": "A plan is okay. Tell us what is already arranged and what you are still looking for. Do not enter a private street address.",
+    "fields": [
+      [
+        "location",
+        "City / state / ZIP / county",
+        "text",
+        "",
+        "City, state, ZIP and county",
+        {
+          "parts": [
+            {
+              "key": "city",
+              "label": "City",
+              "type": "text"
+            },
+            {
+              "key": "state",
+              "label": "State / territory",
+              "type": "choice",
+              "options": [
+                "Alabama",
+                "Alaska",
+                "Arizona",
+                "Arkansas",
+                "California",
+                "Colorado",
+                "Connecticut",
+                "Delaware",
+                "District of Columbia",
+                "Florida",
+                "Georgia",
+                "Hawaii",
+                "Idaho",
+                "Illinois",
+                "Indiana",
+                "Iowa",
+                "Kansas",
+                "Kentucky",
+                "Louisiana",
+                "Maine",
+                "Maryland",
+                "Massachusetts",
+                "Michigan",
+                "Minnesota",
+                "Mississippi",
+                "Missouri",
+                "Montana",
+                "Nebraska",
+                "Nevada",
+                "New Hampshire",
+                "New Jersey",
+                "New Mexico",
+                "New York",
+                "North Carolina",
+                "North Dakota",
+                "Ohio",
+                "Oklahoma",
+                "Oregon",
+                "Pennsylvania",
+                "Rhode Island",
+                "South Carolina",
+                "South Dakota",
+                "Tennessee",
+                "Texas",
+                "Utah",
+                "Vermont",
+                "Virginia",
+                "Washington",
+                "West Virginia",
+                "Wisconsin",
+                "Wyoming",
+                "Puerto Rico",
+                "Guam",
+                "U.S. Virgin Islands",
+                "Northern Mariana Islands",
+                "American Samoa"
+              ]
+            },
+            {
+              "key": "zip",
+              "label": "ZIP code",
+              "type": "text",
+              "hint": "ZIP code (optional)"
+            },
+            {
+              "key": "county",
+              "label": "County",
+              "type": "text",
+              "hint": "County (optional)"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "arrival",
+        "Expected arrival date",
+        "date",
+        "",
+        "Expected arrival date, if known",
+        null
+      ],
+      [
+        "status",
+        "Housing status",
+        "select",
+        [
+          "Undecided",
+          "Searching",
+          "Host arrangement",
+          "Signed lease",
+          "Owned home"
+        ],
+        "Housing status",
+        {
+          "options": [
+            "Undecided",
+            "Searching",
+            "Host arrangement",
+            "Signed lease",
+            "Owned home"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "plan",
+        "Housing plan / fallback",
+        "textarea",
+        "",
+        "Address or area, household capacity, duration and fallback",
+        {
+          "parts": [
+            {
+              "key": "type",
+              "label": "Home type",
+              "type": "choice",
+              "options": [
+                "Apartment",
+                "House",
+                "Room / shared home",
+                "Family / friend home",
+                "Hotel / temporary stay",
+                "Not decided"
+              ]
+            },
+            {
+              "key": "capacity",
+              "label": "Household capacity",
+              "type": "choice",
+              "options": [
+                "Confirmed by lease / owner",
+                "Applicant believes so; not confirmed",
+                "Not yet known"
+              ],
+              "hint": "Can it accommodate the household?"
+            },
+            {
+              "key": "duration",
+              "label": "Stay duration",
+              "type": "choice",
+              "options": [
+                "Under 1 month",
+                "1–3 months",
+                "4–6 months",
+                "7–12 months",
+                "Over 12 months",
+                "Not yet known"
+              ],
+              "hint": "Initial stay"
+            },
+            {
+              "key": "fallback",
+              "label": "Fallback",
+              "type": "choice",
+              "options": [
+                "Stay with family / friend",
+                "Temporary hotel / rental",
+                "Continue searching",
+                "No fallback arranged"
+              ],
+              "hint": "If this plan is delayed"
+            },
+            {
+              "key": "detail",
+              "label": "Area / notes",
+              "type": "text",
+              "hint": "Area or extra detail (optional)"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "cost",
+        "Monthly housing (USD)",
+        "number",
+        "",
+        "Monthly housing cost (USD; use 0 only if confirmed free)",
+        null
+      ]
+    ]
+  },
+  {
+    "id": "funds",
+    "title": "Money you can use",
+    "question": "What money can you use when you move?",
+    "hint": "Add one account at a time. Use a nickname such as “Savings A”, never an account number. Enter only the amount your household can actually use.",
+    "repeat": "accounts",
+    "fields": [
+      [
+        "label",
+        "Account name (use a nickname)",
+        "text",
+        "",
+        "Account alias / institution",
+        {
+          "options": [
+            "Savings account",
+            "Current / checking account",
+            "Joint savings account",
+            "Fixed / term deposit",
+            "Money-market account",
+            "Cash held outside a bank",
+            "Other accessible deposit"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "owner",
+        "Who owns this money?",
+        "text",
+        "",
+        "Owner(s) and your share",
+        {
+          "parts": [
+            {
+              "key": "owner",
+              "label": "Owner",
+              "type": "choice",
+              "options": [
+                "Applicant",
+                "Spouse / partner",
+                "Joint: applicant and spouse",
+                "Other household member",
+                "Supporter outside household"
+              ]
+            },
+            {
+              "key": "share",
+              "label": "Household share",
+              "type": "choice",
+              "options": [
+                "100%",
+                "75%",
+                "50%",
+                "25%",
+                "Not yet confirmed"
+              ],
+              "hint": "Household ownership share"
+            },
+            {
+              "key": "access",
+              "label": "Access authority",
+              "type": "choice",
+              "options": [
+                "Sole authority",
+                "All required owners consent",
+                "Consent required; not yet obtained",
+                "Not yet confirmed"
+              ],
+              "hint": "Access permission"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "balance",
+        "Total account balance",
+        "number",
+        "",
+        "Balance in original currency",
+        null
+      ],
+      [
+        "currency",
+        "Account currency",
+        "text",
+        "",
+        "Currency (three-letter code)",
+        {
+          "options": [
+            "USD",
+            "EUR",
+            "GBP",
+            "PKR",
+            "CNY",
+            "CAD",
+            "AUD",
+            "AED",
+            "INR",
+            "BDT",
+            "PHP",
+            "SAR",
+            "NGN",
+            "JPY",
+            "KRW",
+            "CHF",
+            "ZAR",
+            "BRL",
+            "MXN",
+            "TRY",
+            "VND",
+            "IDR",
+            "THB",
+            "MYR",
+            "SGD",
+            "NPR",
+            "LKR",
+            "KES",
+            "GHS",
+            "EGP",
+            "QAR",
+            "KWD",
+            "BHD",
+            "OMR"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "available",
+        "Amount available for your move",
+        "number",
+        "",
+        "Accessible amount in that currency",
+        null
+      ],
+      [
+        "rate",
+        "U.S. dollars for 1 currency unit",
+        "number",
+        "",
+        "For USD enter 1. For another currency, use a dated bank or transfer-provider rate.",
+        null
+      ],
+      [
+        "fxdate",
+        "Date of the exchange rate",
+        "date",
+        "",
+        "Exchange-rate date",
+        null
+      ],
+      [
+        "fxsource",
+        "Where did you get the exchange rate?",
+        "text",
+        "",
+        "Exchange-rate source (not automatically verified)",
+        {
+          "options": [
+            "USD account; no conversion",
+            "Bank published exchange rate",
+            "Central bank reference rate",
+            "Licensed transfer provider quote",
+            "Dated currency-conversion website",
+            "Applicant estimate; needs verification",
+            "Not yet obtained"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "date",
+        "Balance date",
+        "date",
+        "",
+        "Balance date",
+        null
+      ],
+      [
+        "restrictions",
+        "Can you withdraw or transfer this money?",
+        "textarea",
+        "",
+        "Transfer restrictions, recent deposits, borrowed funds or access delays",
+        {
+          "parts": [
+            {
+              "key": "restriction",
+              "label": "Restriction",
+              "type": "choice",
+              "options": [
+                "None reported by applicant",
+                "Fixed-deposit maturity / penalty",
+                "Daily / monthly transfer limit",
+                "Joint-owner permission needed",
+                "Currency-control / transfer approval",
+                "Funds pledged / frozen",
+                "Not yet confirmed"
+              ],
+              "hint": "Withdrawal / transfer restrictions"
+            },
+            {
+              "key": "origin",
+              "label": "Deposit source",
+              "type": "choice",
+              "options": [
+                "No recent unusual deposits reported",
+                "Salary / business savings",
+                "Gift",
+                "Sale proceeds",
+                "Borrowed funds",
+                "Mixed sources",
+                "Not yet confirmed"
+              ],
+              "hint": "Recent deposits / source"
+            },
+            {
+              "key": "timing",
+              "label": "Access timing",
+              "type": "choice",
+              "options": [
+                "Available now",
+                "Within 30 days",
+                "31–90 days",
+                "Over 90 days",
+                "Not yet known"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Notes",
+              "type": "text",
+              "hint": "Explanation or condition (optional)"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ]
+    ]
+  },
+  {
+    "id": "assets",
+    "title": "Other things you own and money you owe",
+    "question": "What else do you own, and do you owe any money?",
+    "hint": "Choose an item, enter an amount if you know it, then add another row if needed. These items are kept separate from cash savings.",
+    "fields": [
+      [
+        "assets",
+        "Other things you own",
+        "textarea",
+        "",
+        "Choose “No other assets reported” if there are none. Then leave the value and other boxes blank.",
+        {
+          "parts": [
+            {
+              "key": "type",
+              "label": "Asset type",
+              "type": "choice",
+              "options": [
+                "No other assets reported",
+                "Real estate",
+                "Vehicle",
+                "Retirement / pension account",
+                "Investments / securities",
+                "Business ownership",
+                "Other non-cash asset"
+              ]
+            },
+            {
+              "key": "owner",
+              "label": "Owner",
+              "type": "choice",
+              "options": [
+                "Applicant",
+                "Spouse / partner",
+                "Joint: applicant and spouse",
+                "Other household member",
+                "Supporter outside household"
+              ]
+            },
+            {
+              "key": "value",
+              "label": "Estimated value",
+              "type": "number"
+            },
+            {
+              "key": "currency",
+              "label": "Currency",
+              "type": "choice",
+              "options": [
+                "USD",
+                "EUR",
+                "GBP",
+                "PKR",
+                "CNY",
+                "CAD",
+                "AUD",
+                "AED",
+                "INR",
+                "BDT",
+                "PHP",
+                "SAR",
+                "NGN",
+                "JPY",
+                "KRW",
+                "CHF",
+                "ZAR",
+                "BRL",
+                "MXN",
+                "TRY",
+                "VND",
+                "IDR",
+                "THB",
+                "MYR",
+                "SGD",
+                "NPR",
+                "LKR",
+                "KES",
+                "GHS",
+                "EGP",
+                "QAR",
+                "KWD",
+                "BHD",
+                "OMR"
+              ]
+            },
+            {
+              "key": "date",
+              "label": "Valuation date",
+              "type": "date"
+            },
+            {
+              "key": "basis",
+              "label": "Valuation basis",
+              "type": "choice",
+              "options": [
+                "Independent valuation",
+                "Official statement",
+                "Comparable market listings",
+                "Applicant estimate",
+                "Not yet valued"
+              ]
+            }
+          ],
+          "rows": true,
+          "maxRows": 10
+        }
+      ],
+      [
+        "debts",
+        "Money you owe",
+        "textarea",
+        "",
+        "Choose “No liabilities reported” if you do not owe money. Then leave the amounts blank.",
+        {
+          "parts": [
+            {
+              "key": "type",
+              "label": "Obligation type",
+              "type": "choice",
+              "options": [
+                "No liabilities reported",
+                "Mortgage",
+                "Vehicle loan",
+                "Personal loan",
+                "Credit card",
+                "Education loan",
+                "Business debt",
+                "Family / dependent support",
+                "Other debt"
+              ]
+            },
+            {
+              "key": "owner",
+              "label": "Responsible person",
+              "type": "choice",
+              "options": [
+                "Applicant",
+                "Spouse / partner",
+                "Joint: applicant and spouse",
+                "Other household member",
+                "Supporter outside household"
+              ]
+            },
+            {
+              "key": "balance",
+              "label": "Balance / total obligation",
+              "type": "number"
+            },
+            {
+              "key": "currency",
+              "label": "Currency",
+              "type": "choice",
+              "options": [
+                "USD",
+                "EUR",
+                "GBP",
+                "PKR",
+                "CNY",
+                "CAD",
+                "AUD",
+                "AED",
+                "INR",
+                "BDT",
+                "PHP",
+                "SAR",
+                "NGN",
+                "JPY",
+                "KRW",
+                "CHF",
+                "ZAR",
+                "BRL",
+                "MXN",
+                "TRY",
+                "VND",
+                "IDR",
+                "THB",
+                "MYR",
+                "SGD",
+                "NPR",
+                "LKR",
+                "KES",
+                "GHS",
+                "EGP",
+                "QAR",
+                "KWD",
+                "BHD",
+                "OMR"
+              ]
+            },
+            {
+              "key": "payment",
+              "label": "Scheduled payment",
+              "type": "number"
+            },
+            {
+              "key": "frequency",
+              "label": "Payment frequency",
+              "type": "choice",
+              "options": [
+                "Monthly",
+                "Quarterly",
+                "Annually",
+                "One-time",
+                "No fixed schedule",
+                "Not yet known"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Creditor alias / condition (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": true,
+          "maxRows": 10
+        }
+      ],
+      [
+        "sale",
+        "Sale timing / restrictions",
+        "textarea",
+        "",
+        "Realization timing, sale costs and restrictions",
+        {
+          "options": [
+            "No asset sales relied on for settlement",
+            "Sale planned; no buyer or contract",
+            "Under contract; proceeds not yet received",
+            "Sale completed; cash recorded separately in Liquid funds",
+            "Access restricted; excluded from settlement cash",
+            "Not yet determined"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "id": "work",
+    "title": "Work and education",
+    "question": "What is each adult’s work and education plan?",
+    "hint": "Add each adult, including anyone who will not work. Choosing “not working” is an answer; do not invent a job or offer.",
+    "repeat": "adults",
+    "fields": [
+      [
+        "person",
+        "Adult name or nickname",
+        "text",
+        "",
+        "Adult name or alias",
+        {
+          "options": [
+            "Applicant",
+            "Spouse / partner",
+            "Adult dependent",
+            "Other adult"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "status",
+        "Work situation",
+        "select",
+        [
+          "Unknown",
+          "Employed outside U.S.",
+          "Confirmed U.S. offer",
+          "Seeking work",
+          "Not planning to work",
+          "Employed in U.S."
+        ],
+        "Employment status",
+        {
+          "options": [
+            "Unknown",
+            "Employed outside U.S.",
+            "Confirmed U.S. offer",
+            "Seeking work",
+            "Not planning to work",
+            "Employed in U.S."
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "employment",
+        "Work now",
+        "textarea",
+        "",
+        "Current work, income/currency and whether it continues after relocation",
+        {
+          "parts": [
+            {
+              "key": "type",
+              "label": "Current work",
+              "type": "choice",
+              "options": [
+                "Employed full-time",
+                "Employed part-time",
+                "Self-employed",
+                "Student",
+                "Not employed",
+                "Retired",
+                "Unpaid caregiver"
+              ]
+            },
+            {
+              "key": "role",
+              "label": "Occupation / role (optional)",
+              "type": "text"
+            },
+            {
+              "key": "income",
+              "label": "Current income",
+              "type": "number"
+            },
+            {
+              "key": "currency",
+              "label": "Currency",
+              "type": "choice",
+              "options": [
+                "USD",
+                "EUR",
+                "GBP",
+                "PKR",
+                "CNY",
+                "CAD",
+                "AUD",
+                "AED",
+                "INR",
+                "BDT",
+                "PHP",
+                "SAR",
+                "NGN",
+                "JPY",
+                "KRW",
+                "CHF",
+                "ZAR",
+                "BRL",
+                "MXN",
+                "TRY",
+                "VND",
+                "IDR",
+                "THB",
+                "MYR",
+                "SGD",
+                "NPR",
+                "LKR",
+                "KES",
+                "GHS",
+                "EGP",
+                "QAR",
+                "KWD",
+                "BHD",
+                "OMR"
+              ]
+            },
+            {
+              "key": "frequency",
+              "label": "Income frequency",
+              "type": "choice",
+              "options": [
+                "Monthly",
+                "Yearly",
+                "Weekly",
+                "Variable"
+              ]
+            },
+            {
+              "key": "continues",
+              "label": "Will income continue after relocation?",
+              "type": "choice",
+              "options": [
+                "Confirmed to continue",
+                "Will stop",
+                "Not yet confirmed",
+                "Not applicable"
+              ]
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "search",
+        "Work plans after moving",
+        "textarea",
+        "",
+        "U.S. employer/role, search activity or offer terms and start date",
+        {
+          "parts": [
+            {
+              "key": "stage",
+              "label": "U.S. work plan",
+              "type": "choice",
+              "options": [
+                "Not searching yet",
+                "Researching employers",
+                "Applications submitted",
+                "Interviews arranged",
+                "Written offer received",
+                "Existing work continues in U.S.",
+                "Not planning to work"
+              ]
+            },
+            {
+              "key": "role",
+              "label": "Target role / employer (optional)",
+              "type": "text"
+            },
+            {
+              "key": "start",
+              "label": "Confirmed start date (if any)",
+              "type": "date"
+            },
+            {
+              "key": "detail",
+              "label": "Offer condition or search detail (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "education",
+        "Education",
+        "textarea",
+        "",
+        "Education, qualifications and credential evidence",
+        {
+          "parts": [
+            {
+              "key": "level",
+              "label": "Highest education",
+              "type": "choice",
+              "options": [
+                "No formal education",
+                "Primary school",
+                "Secondary / high school",
+                "Vocational / trade qualification",
+                "Associate degree / diploma",
+                "Bachelor degree",
+                "Master degree",
+                "Doctorate / PhD",
+                "Professional degree"
+              ]
+            },
+            {
+              "key": "field",
+              "label": "Field of study (optional)",
+              "type": "text"
+            },
+            {
+              "key": "evaluation",
+              "label": "Credential evaluation",
+              "type": "choice",
+              "options": [
+                "Completed",
+                "Requested / in progress",
+                "Not obtained",
+                "Not required by intended employer",
+                "Requirement not yet checked"
+              ]
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "license",
+        "Does this work need a U.S. license?",
+        "textarea",
+        "",
+        "U.S. licensing requirements, status, costs and timeline",
+        {
+          "parts": [
+            {
+              "key": "required",
+              "label": "U.S. licensing requirement",
+              "type": "choice",
+              "options": [
+                "Required for planned role",
+                "Not required for planned role (applicant checked)",
+                "Requirement not yet checked",
+                "Not applicable; not planning to work"
+              ]
+            },
+            {
+              "key": "status",
+              "label": "License / credential status",
+              "type": "choice",
+              "options": [
+                "Not started",
+                "Documents being prepared",
+                "Application submitted",
+                "Examination / training pending",
+                "License issued",
+                "Not applicable"
+              ]
+            },
+            {
+              "key": "timeline",
+              "label": "Expected timeline",
+              "type": "choice",
+              "options": [
+                "Under 3 months",
+                "3–6 months",
+                "7–12 months",
+                "Over 12 months",
+                "Not yet known",
+                "Not applicable"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "State, cost or condition (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "fallback",
+        "How will you pay bills before work starts?",
+        "textarea",
+        "",
+        "Funding and alternative plan until work begins",
+        {
+          "parts": [
+            {
+              "key": "source",
+              "label": "Interim funding",
+              "type": "choice",
+              "options": [
+                "Accessible household savings",
+                "Spouse / household income",
+                "Written family / sponsor commitment",
+                "Mix of savings and support",
+                "No interim funding arranged"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Condition or extra detail (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ]
+    ]
+  },
+  {
+    "id": "applications",
+    "title": "Job applications",
+    "question": "Have you applied for any U.S. jobs?",
+    "hint": "This list is optional if you are not applying for jobs. An application or interview is not a job offer.",
+    "repeat": "applications",
+    "fields": [
+      [
+        "person",
+        "Adult alias",
+        "text",
+        "",
+        "Adult name or alias",
+        {
+          "options": [
+            "Applicant",
+            "Spouse / partner",
+            "Adult dependent",
+            "Other adult"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "employer",
+        "Employer / institution",
+        "text",
+        "",
+        "Employer / institution",
+        null
+      ],
+      [
+        "role",
+        "Role / reference",
+        "text",
+        "",
+        "Role / reference",
+        null
+      ],
+      [
+        "date",
+        "Application / contact date",
+        "date",
+        "",
+        "Application or contact date",
+        null
+      ],
+      [
+        "status",
+        "Application status",
+        "select",
+        [
+          "Researching",
+          "Applied",
+          "Acknowledged",
+          "Interview",
+          "Offer received",
+          "Rejected",
+          "Withdrawn"
+        ],
+        "Application status",
+        {
+          "options": [
+            "Researching",
+            "Applied",
+            "Acknowledged",
+            "Interview",
+            "Offer received",
+            "Rejected",
+            "Withdrawn"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "next",
+        "Next step / deadline",
+        "textarea",
+        "",
+        "Next step / deadline",
+        {
+          "parts": [
+            {
+              "key": "action",
+              "label": "Next step",
+              "type": "choice",
+              "options": [
+                "Await employer response",
+                "Follow up with employer",
+                "Attend interview",
+                "Provide requested documents",
+                "Review offer conditions",
+                "No further action",
+                "Not yet determined"
+              ]
+            },
+            {
+              "key": "deadline",
+              "label": "Deadline / planned date",
+              "type": "date"
+            },
+            {
+              "key": "detail",
+              "label": "Extra detail (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ]
+    ]
+  },
+  {
+    "id": "support",
+    "title": "Help from family or a sponsor",
+    "question": "Will someone help you with money or housing?",
+    "hint": "Tell us what the person has actually agreed to provide. Promised money is kept separate from cash you already have.",
+    "fields": [
+      [
+        "status",
+        "Has someone agreed to help?",
+        "select",
+        [
+          "Unknown",
+          "No support relied on",
+          "Informal discussion",
+          "Written commitment",
+          "Formal affidavit available"
+        ],
+        "Support status",
+        {
+          "options": [
+            "Unknown",
+            "No support relied on",
+            "Informal discussion",
+            "Written commitment",
+            "Formal affidavit available"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "details",
+        "What help has been promised?",
+        "textarea",
+        "",
+        "Supporter, relationship, type/amount/currency, duration and conditions",
+        {
+          "parts": [
+            {
+              "key": "relationship",
+              "label": "Supporter relationship",
+              "type": "choice",
+              "options": [
+                "No support relied on",
+                "Spouse / partner",
+                "Parent",
+                "Sibling",
+                "Other relative",
+                "Friend",
+                "Employer",
+                "Organization"
+              ]
+            },
+            {
+              "key": "alias",
+              "label": "Supporter alias (optional)",
+              "type": "text"
+            },
+            {
+              "key": "type",
+              "label": "Support offered",
+              "type": "choice",
+              "options": [
+                "Temporary housing",
+                "Regular cash support",
+                "One-time cash gift",
+                "Emergency funds only",
+                "Insurance / medical costs",
+                "Several forms of support",
+                "No commitment yet"
+              ]
+            },
+            {
+              "key": "amount",
+              "label": "Promised amount",
+              "type": "number"
+            },
+            {
+              "key": "currency",
+              "label": "Currency",
+              "type": "choice",
+              "options": [
+                "USD",
+                "EUR",
+                "GBP",
+                "PKR",
+                "CNY",
+                "CAD",
+                "AUD",
+                "AED",
+                "INR",
+                "BDT",
+                "PHP",
+                "SAR",
+                "NGN",
+                "JPY",
+                "KRW",
+                "CHF",
+                "ZAR",
+                "BRL",
+                "MXN",
+                "TRY",
+                "VND",
+                "IDR",
+                "THB",
+                "MYR",
+                "SGD",
+                "NPR",
+                "LKR",
+                "KES",
+                "GHS",
+                "EGP",
+                "QAR",
+                "KWD",
+                "BHD",
+                "OMR"
+              ]
+            },
+            {
+              "key": "frequency",
+              "label": "Frequency",
+              "type": "choice",
+              "options": [
+                "One-time",
+                "Monthly",
+                "As needed",
+                "Housing only; no cash"
+              ]
+            },
+            {
+              "key": "duration",
+              "label": "Duration",
+              "type": "choice",
+              "options": [
+                "Under 1 month",
+                "1–3 months",
+                "4–6 months",
+                "7–12 months",
+                "Over 12 months",
+                "Not specified"
+              ]
+            },
+            {
+              "key": "condition",
+              "label": "Conditions (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": true,
+          "maxRows": 10,
+          "when": {
+            "field": "status",
+            "notIn": [
+              "No support relied on"
+            ]
+          }
+        }
+      ],
+      [
+        "capacity",
+        "Proof that the person can help",
+        "textarea",
+        "",
+        "Evidence of capacity and any requested affidavit / applicability review",
+        {
+          "parts": [
+            {
+              "key": "document",
+              "label": "Capacity evidence",
+              "type": "choice",
+              "options": [
+                "No evidence obtained",
+                "Income / employment evidence",
+                "Bank / asset evidence",
+                "Housing ownership / lease",
+                "Several supporting documents"
+              ]
+            },
+            {
+              "key": "affidavit",
+              "label": "Affidavit status",
+              "type": "choice",
+              "options": [
+                "Not requested in notice",
+                "Requested; not yet prepared",
+                "Available for review",
+                "Not sure whether applicable"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Extra detail (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1,
+          "when": {
+            "field": "status",
+            "notIn": [
+              "No support relied on"
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "id": "insurance",
+    "title": "Health insurance and medical costs",
+    "question": "How will you pay for medical care in the U.S.?",
+    "hint": "You do not need active U.S. insurance to start this form. Explain what you have arranged, what is still missing, and how you will cover any gap. A quote is not active insurance.",
+    "fields": [
+      [
+        "status",
+        "What have you arranged so far?",
+        "select",
+        [
+          "Unknown",
+          "Inquiry sent; quote pending",
+          "Written quote received",
+          "Enrollment pending",
+          "Active coverage"
+        ],
+        "Insurance status",
+        {
+          "options": [
+            "Unknown",
+            "Inquiry sent; quote pending",
+            "Written quote received",
+            "Enrollment pending",
+            "Active coverage"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "plan",
+        "Insurance plan and family members",
+        "textarea",
+        "",
+        "Carrier / plan, covered members, geographic network and coverage type",
+        {
+          "parts": [
+            {
+              "key": "carrier",
+              "label": "Carrier / plan name (optional)",
+              "type": "text"
+            },
+            {
+              "key": "type",
+              "label": "Coverage type",
+              "type": "choice",
+              "options": [
+                "ACA-compliant major medical (as quoted)",
+                "Employer-sponsored health plan",
+                "Medicare (eligibility to be confirmed)",
+                "Travel / temporary medical policy",
+                "Other private plan",
+                "Coverage type not confirmed"
+              ]
+            },
+            {
+              "key": "members",
+              "label": "Covered household members",
+              "type": "choice",
+              "options": [
+                "All household members",
+                "Applicant only",
+                "Applicant and spouse",
+                "Children only",
+                "Some members; details below",
+                "Not yet confirmed"
+              ]
+            },
+            {
+              "key": "network",
+              "label": "U.S. network / location",
+              "type": "choice",
+              "options": [
+                "Intended area covered (applicant checked)",
+                "Network still being checked",
+                "Outside intended area",
+                "Not yet known"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Member aliases / limits (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "premium",
+        "Monthly insurance price (USD)",
+        "number",
+        "",
+        "Monthly family premium (USD)",
+        null
+      ],
+      [
+        "terms",
+        "Costs the insurance may not pay",
+        "textarea",
+        "",
+        "Deductible, out-of-pocket maximum, exclusions and subsidy assumptions",
+        {
+          "parts": [
+            {
+              "key": "deductible",
+              "label": "Family deductible (USD)",
+              "type": "number"
+            },
+            {
+              "key": "maximum",
+              "label": "Family out-of-pocket maximum (USD)",
+              "type": "number"
+            },
+            {
+              "key": "subsidy",
+              "label": "Premium assumption",
+              "type": "choice",
+              "options": [
+                "Full price; no subsidy assumed",
+                "Employer contribution included",
+                "Subsidy shown in quote; eligibility not verified",
+                "Not yet known"
+              ]
+            },
+            {
+              "key": "exclusions",
+              "label": "Exclusions / limits",
+              "type": "choice",
+              "options": [
+                "See attached policy / quote",
+                "Exclusions not yet reviewed",
+                "Known exclusions; describe below"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Key limit / exception (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "dates",
+        "When could the insurance start?",
+        "textarea",
+        "",
+        "Quote date/expiry, proposed effective date and enrollment conditions",
+        {
+          "parts": [
+            {
+              "key": "quote",
+              "label": "Quote date",
+              "type": "date"
+            },
+            {
+              "key": "expiry",
+              "label": "Quote expires",
+              "type": "date"
+            },
+            {
+              "key": "effective",
+              "label": "Proposed / actual effective date",
+              "type": "date"
+            },
+            {
+              "key": "condition",
+              "label": "Enrollment condition",
+              "type": "choice",
+              "options": [
+                "Active; confirmation available",
+                "Enrollment approval pending",
+                "Depends on arrival / admission",
+                "Depends on employment / eligibility",
+                "Not yet confirmed"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Extra condition (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ],
+      [
+        "care",
+        "Costs before insurance starts or outside coverage",
+        "textarea",
+        "",
+        "Anticipated care costs, coverage gap and how those costs will be funded",
+        {
+          "parts": [
+            {
+              "key": "gap",
+              "label": "Coverage gap",
+              "type": "choice",
+              "options": [
+                "No gap expected (applicant estimate)",
+                "Gap expected before coverage starts",
+                "Not yet determined"
+              ]
+            },
+            {
+              "key": "funding",
+              "label": "Care-cost funding",
+              "type": "choice",
+              "options": [
+                "Household health reserve",
+                "Accessible savings",
+                "Written support commitment",
+                "Insurance plus household reserve",
+                "No funding arranged yet"
+              ]
+            },
+            {
+              "key": "cost",
+              "label": "Estimated monthly uncovered costs (USD)",
+              "type": "number"
+            },
+            {
+              "key": "detail",
+              "label": "Cost or coverage detail (optional; no diagnosis needed)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ]
+    ]
+  },
+  {
+    "id": "budget",
+    "title": "Your living costs",
+    "question": "How much do you expect to spend each month?",
+    "hint": "Enter U.S. dollar amounts. Leave an amount blank if you do not know. Enter 0 only if you have checked that there is no cost.",
+    "fields": [
+      [
+        "rent",
+        "Monthly housing",
+        "number",
+        "",
+        "Monthly housing",
+        null
+      ],
+      [
+        "utilities",
+        "Monthly utilities / phone",
+        "number",
+        "",
+        "Monthly utilities / phone",
+        null
+      ],
+      [
+        "food",
+        "Monthly food",
+        "number",
+        "",
+        "Monthly food",
+        null
+      ],
+      [
+        "transport",
+        "Monthly transport",
+        "number",
+        "",
+        "Monthly transport",
+        null
+      ],
+      [
+        "insurance",
+        "Monthly insurance",
+        "number",
+        "",
+        "Monthly insurance premium",
+        null
+      ],
+      [
+        "health",
+        "Monthly health reserve",
+        "number",
+        "",
+        "Monthly out-of-pocket health reserve",
+        null
+      ],
+      [
+        "care",
+        "Monthly care / education",
+        "number",
+        "",
+        "Monthly childcare / education",
+        null
+      ],
+      [
+        "debt",
+        "Monthly debt / obligations",
+        "number",
+        "",
+        "Monthly debt and other support obligations",
+        null
+      ],
+      [
+        "other",
+        "Other monthly costs",
+        "number",
+        "",
+        "Other monthly costs",
+        null
+      ],
+      [
+        "arrival",
+        "One-time arrival costs",
+        "number",
+        "",
+        "One-time travel, deposits, furnishings and fees",
+        null
+      ],
+      [
+        "reserve",
+        "Protected emergency reserve",
+        "number",
+        "",
+        "Protected emergency reserve",
+        null
+      ],
+      [
+        "basis",
+        "Budget basis / dates",
+        "textarea",
+        "",
+        "Estimate dates, sources, exclusions and contingencies",
+        {
+          "parts": [
+            {
+              "key": "basis",
+              "label": "Estimate basis",
+              "type": "choice",
+              "options": [
+                "Current bills / lease / written quotes",
+                "Published prices / rental listings",
+                "Applicant planning estimate",
+                "Mixed documents and estimates"
+              ]
+            },
+            {
+              "key": "date",
+              "label": "Estimate date",
+              "type": "date"
+            },
+            {
+              "key": "income",
+              "label": "Future income in this budget",
+              "type": "choice",
+              "options": [
+                "Not relied on for settlement runway",
+                "Expected income described separately; not guaranteed"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Exclusion / contingency (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ]
+    ]
+  },
+  {
+    "id": "benefits",
+    "title": "U.S. benefits history",
+    "question": "Have you or your family received any U.S. public benefits?",
+    "hint": "Choose “not sure” if you need help. Do not stop or avoid needed benefits because of this app. A qualified adviser can explain how the rules apply to you.",
+    "fields": [
+      [
+        "status",
+        "Benefits history status",
+        "select",
+        [
+          "Unknown / need advice",
+          "None reported by applicant",
+          "History to describe"
+        ],
+        "History to report",
+        {
+          "options": [
+            "Unknown / need advice",
+            "None reported by applicant",
+            "History to describe"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "details",
+        "Benefits details / questions",
+        "textarea",
+        "",
+        "Recipient, program, agency, dates, amount, circumstances and records; or questions for counsel",
+        {
+          "parts": [
+            {
+              "key": "recipient",
+              "label": "Recipient alias (optional)",
+              "type": "text"
+            },
+            {
+              "key": "program",
+              "label": "Program / topic",
+              "type": "choice",
+              "options": [
+                "No U.S. benefits reported",
+                "Program name known; specify below",
+                "Program name not known",
+                "Question for qualified counsel"
+              ]
+            },
+            {
+              "key": "agency",
+              "label": "Agency / program name (optional)",
+              "type": "text"
+            },
+            {
+              "key": "start",
+              "label": "Start date",
+              "type": "date"
+            },
+            {
+              "key": "end",
+              "label": "End date",
+              "type": "date"
+            },
+            {
+              "key": "amount",
+              "label": "Amount (USD, if known)",
+              "type": "number"
+            },
+            {
+              "key": "context",
+              "label": "Current status",
+              "type": "choice",
+              "options": [
+                "Currently receiving",
+                "Previously received",
+                "Applied / pending",
+                "Never received; question only",
+                "Not yet confirmed"
+              ]
+            },
+            {
+              "key": "detail",
+              "label": "Circumstance / question (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": true,
+          "maxRows": 10,
+          "when": {
+            "field": "status",
+            "notIn": [
+              "None reported by applicant"
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "id": "evidence",
+    "title": "Your supporting documents",
+    "question": "What documents do you already have?",
+    "hint": "Choose a document type and whether you have it. The app creates document numbers for you. Keep documents outside the app; you are making a list, not uploading files.",
+    "repeat": "evidence",
+    "fields": [
+      [
+        "id",
+        "Document number",
+        "text",
+        "",
+        "Unique evidence ID, e.g. E01",
+        {
+          "hidden": true
+        }
+      ],
+      [
+        "title",
+        "Type of document",
+        "text",
+        "",
+        "Document title / issuer",
+        {
+          "options": [
+            "Bank statement",
+            "Bank balance / access letter",
+            "Exchange-rate quote / reference",
+            "Lease / housing commitment",
+            "Housing search / cost estimate",
+            "Employment contract / offer letter",
+            "Job application confirmation",
+            "Interview invitation / correspondence",
+            "CV / resume",
+            "Degree / transcript",
+            "Credential evaluation",
+            "Professional license / registration",
+            "Support letter",
+            "Supporter income / asset evidence",
+            "Affidavit of Support (if applicable)",
+            "Health insurance quote",
+            "Insurance enrollment / policy confirmation",
+            "Settlement budget worksheet",
+            "Asset valuation",
+            "Loan / liability statement",
+            "Benefits history / agency record",
+            "Consular notice",
+            "Household civil-document index",
+            "Applicant statement"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "date",
+        "Date on the document",
+        "date",
+        "",
+        "Document date",
+        null
+      ],
+      [
+        "status",
+        "Do you have it?",
+        "select",
+        [
+          "Missing",
+          "Requested",
+          "Available",
+          "Needs translation",
+          "Expired / needs update"
+        ],
+        "Availability",
+        {
+          "options": [
+            "Missing",
+            "Requested",
+            "Available",
+            "Needs translation",
+            "Expired / needs update"
+          ],
+          "optionLabels": {
+            "Unknown": "I am not sure",
+            "Undecided": "I have not decided yet",
+            "Searching": "I am still looking",
+            "Host arrangement": "I will stay with family or a friend",
+            "Signed lease": "I have a signed lease",
+            "Owned home": "A home I own",
+            "Inquiry sent; quote pending": "I asked for a quote; I am waiting",
+            "Written quote received": "I have a written quote",
+            "Enrollment pending": "I applied; coverage has not started",
+            "Active coverage": "Coverage is active",
+            "Missing": "No, I do not have it",
+            "Requested": "I have asked for it",
+            "Available": "Yes, I have it",
+            "Needs translation": "I have it; it needs an English translation",
+            "Expired / needs update": "I need a new or updated copy",
+            "No support relied on": "I will not rely on anyone else for support",
+            "Unknown / need advice": "I am not sure; I need advice",
+            "None reported by applicant": "No U.S. public benefits to report",
+            "History to describe": "Yes, or I need to explain the history"
+          }
+        }
+      ],
+      [
+        "supports",
+        "What does this document show?",
+        "textarea",
+        "",
+        "Facts supported and page / file reference",
+        {
+          "parts": [
+            {
+              "key": "topic",
+              "label": "Facts supported",
+              "type": "choice",
+              "options": [
+                "Household",
+                "Housing",
+                "Account balance / access",
+                "Exchange rate",
+                "Assets / liabilities",
+                "Employment / job search",
+                "Education / licensing",
+                "Family / sponsor support",
+                "Health insurance / costs",
+                "Settlement budget",
+                "Benefits history",
+                "Consular request"
+              ]
+            },
+            {
+              "key": "reference",
+              "label": "Exhibit / page / file reference (optional)",
+              "type": "text"
+            },
+            {
+              "key": "detail",
+              "label": "Issuer or additional fact (optional)",
+              "type": "text"
+            }
+          ],
+          "rows": false,
+          "maxRows": 1
+        }
+      ]
+    ]
+  }
 ]

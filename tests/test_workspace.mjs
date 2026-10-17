@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {Workspace} from '../public/workspace.mjs';
+import {newKeys,unlockKey,rewrapKey,encryptBackup,decryptBackup} from '../public/crypto-store.mjs';
+const snap=n=>({data:{version:1,sections:{case:{name:'Applicant '+n},evidence:[]}},step:n});
+let release,requests=[];const w=new Workspace({delay:100000,request:async(path,body)=>{requests.push(body);return {version:1};},encrypt:()=>new Promise(r=>release=r)});
+w.bind({userId:1,applicationId:11,key:'key-A'});w.changed(snap(1));const pending=w.flush();w.invalidate();release('cipher-A');await pending;assert.equal(requests.length,0,'stale encryption must not reach a different account');
+let count=0;const seq=new Workspace({delay:100000,encrypt:async s=>JSON.stringify(s),request:async(path,b)=>{count++;assert.equal(b.expected_version,count-1);return {version:count};}});seq.bind({userId:2,applicationId:22,key:'key-B'});seq.changed(snap(2));await seq.flush();seq.changed(snap(3));await seq.flush();assert.equal(seq.version,2);assert.equal(seq.dirty,false);
+const notes=[],bad=new Workspace({delay:100000,encrypt:async()=> 'cipher',onStatus:(s,t)=>notes.push([s,t]),request:async()=>{const e=Error('Expired session');e.status=403;throw e;}});bad.bind({userId:1,applicationId:11,key:'A'});bad.changed(snap(1));await assert.rejects(bad.flush(),/Expired/);assert.equal(bad.dirty,true);assert.equal(notes.at(-1)[0],'failed');bad.invalidate();
+const keys=await newKeys('ExamplePassword123!');assert.equal(await unlockKey(keys.password_wrap,'ExamplePassword123!'),keys.key);assert.equal(await unlockKey(keys.recovery_wrap,keys.recovery),keys.key);const wrap=await rewrapKey(keys.key,'ChangedPassword123!');assert.equal(await unlockKey(wrap,'ChangedPassword123!'),keys.key);const saved=await encryptBackup(snap(4),keys.key);assert.equal((await decryptBackup(saved,await unlockKey(wrap,'ChangedPassword123!'))).step,4);
+console.log('Workspace checks passed: stale save cancellation, scoped request identity, serialized versions, visible failures, recovery unlock, password rewrap, preserved encrypted answers.');

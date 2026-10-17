@@ -1,0 +1,14 @@
+# Replace prep.particlesolidlab.com with your actual domain before installing.
+# DNS must point to this server. Caddy obtains and renews HTTPS certificates.
+prep.particlesolidlab.com {
+    request_body {
+        max_size 4MB
+    }
+    reverse_proxy 127.0.0.1:8765 {
+        header_up X-Real-IP {remote_host}
+        transport http {
+            response_header_timeout 90s
+        }
+    }
+    header Strict-Transport-Security "max-age=31536000"
+}

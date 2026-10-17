@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {encryptBackup,decryptBackup} from '../public/backup.mjs';
+const data={data:{version:1,sections:{case:{name:'Synthetic example'},funds:[{balance:'12345'}]}},step:3};
+const encrypted=await encryptBackup(data,'synthetic-test-password');
+assert(!encrypted.includes('12345'));
+assert.deepEqual(await decryptBackup(encrypted,'synthetic-test-password'),data);
+assert.notEqual(encrypted,await encryptBackup(data,'synthetic-test-password'));
+await assert.rejects(decryptBackup(encrypted,'incorrect-password'));
+const tampered=JSON.parse(encrypted);tampered.cipher=(tampered.cipher[0]==='A'?'B':'A')+tampered.cipher.slice(1);
+await assert.rejects(decryptBackup(JSON.stringify(tampered),'synthetic-test-password'));
+await assert.rejects(encryptBackup(data,'short'));
+console.log('6 backup checks passed: round-trip, confidentiality, fresh randomness, wrong password, tampering, weak password.');

@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "sample": true,
+  "sections": {
+    "case": {
+      "name": "Example family applicant",
+      "category": "IR1 \u2014 Spouse of a U.S. citizen",
+      "stage": "Preparing before my first interview",
+      "post": "",
+      "interview": "",
+      "notice": "",
+      "asof": "",
+      "factDate": "2026-10-17",
+      "source": "Fictional teaching example",
+      "refs": "E02",
+      "certainty": "Applicant statement"
+    },
+    "household": {
+      "members": "Alias: Applicant; Relationship: Applicant; Age (years): 34; Moving to U.S.?: Accompanying now; Dependent?: Partly\nAlias: U.S. spouse; Relationship: Spouse / partner; Age (years): 35; Moving to U.S.?: Already living in the U.S.; Dependent?: No",
+      "adults": "2",
+      "care": "Care: No dependent care needed",
+      "factDate": "2026-10-17",
+      "source": "Fictional teaching example",
+      "refs": "E02",
+      "certainty": "Applicant statement",
+      "_guided": {
+        "members": [
+          {
+            "alias": "Applicant",
+            "relationship": "Applicant",
+            "age": "34",
+            "move": "Accompanying now",
+            "support": "Partly"
+          },
+          {
+            "alias": "U.S. spouse",
+            "relationship": "Spouse / partner",
+            "age": "35",
+            "move": "Already living in the U.S.",
+            "support": "No"
+          }
+        ],
+        "care": [
+          {
+            "person": "",
+            "type": "No dependent care needed",
+            "status": "",
+            "detail": ""
+          }
+        ]
+      }
+    },
+    "housing": {
+      "location": "City: Example city; State / territory: Illinois",
+      "arrival": "",
+      "status": "Signed lease",
+      "plan": "Applicant will join spouse in a rented home. Lease and housing commitment are listed; no private address is stored.",
+      "cost": "2200",
+      "factDate": "2026-10-17",
+      "source": "Fictional teaching example",
+      "refs": "E03",
+      "certainty": "Estimate",
+      "_guided": {
+        "location": [
+          {
+            "city": "Example city",
+            "state": "Illinois",
+            "zip": "",
+            "county": ""
+          }
+        ]
+      }
+    },
+    "funds": [
+      {
+        "label": "Savings A",
+        "owner": "Owner: Applicant; Household share: 100%; Access authority: Sole authority",
+        "balance": "18000",
+        "currency": "USD",
+        "available": "18000",
+        "rate": "1",
+        "fxdate": "2026-10-01",
+        "fxsource": "USD account; no conversion",
+        "date": "2026-10-01",
+        "restrictions": "Restriction: None reported by applicant; Deposit source: Salary / business savings; Access timing: Available now",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "E01",
+        "certainty": "Applicant statement",
+        "_guided": {
+          "owner": [
+            {
+              "owner": "Applicant",
+              "share": "100%",
+              "access": "Sole authority"
+            }
+          ],
+          "restrictions": [
+            {
+              "restriction": "None reported by applicant",
+              "origin": "Salary / business savings",
+              "timing": "Available now",
+              "detail": ""
+            }
+          ]
+        }
+      }
+    ],
+    "assets": {
+      "assets": "Asset type: No other assets reported",
+      "debts": "Obligation type: No liabilities reported",
+      "sale": "No asset sales relied on for settlement",
+      "factDate": "2026-10-17",
+      "source": "Fictional teaching example",
+      "refs": "",
+      "certainty": "Applicant statement",
+      "_guided": {
+        "assets": [
+          {
+            "type": "No other assets reported",
+            "owner": "",
+            "value": "",
+            "currency": "",
+            "date": "",
+            "basis": ""
+          }
+        ],
+        "debts": [
+          {
+            "type": "No liabilities reported",
+            "owner": "",
+            "balance": "",
+            "currency": "",
+            "payment": "",
+            "frequency": "",
+            "detail": ""
+          }
+        ]
+      }
+    },
+    "work": [
+      {
+        "person": "Applicant",
+        "status": "Not planning to work",
+        "employment": "Current work: Not employed; Will income continue after relocation?: Not applicable",
+        "search": "Not planning to work during initial settlement.",
+        "education": "Highest education: Secondary / high school; Credential evaluation: Not obtained",
+        "license": "Not applicable; no licensed role relied on.",
+        "fallback": "Accessible household savings and spouse income.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement",
+        "_guided": {
+          "employment": [
+            {
+              "type": "Not employed",
+              "role": "",
+              "income": "",
+              "currency": "",
+              "frequency": "",
+              "continues": "Not applicable"
+            }
+          ],
+          "education": [
+            {
+              "level": "Secondary / high school",
+              "field": "",
+              "evaluation": "Not obtained"
+            }
+          ]
+        }
+      },
+      {
+        "person": "U.S. spouse",
+        "status": "Employed in U.S.",
+        "employment": "Current U.S. employment; gross pay USD 5000 per month in this fictional example.",
+        "search": "Continuing current work; no new job search claimed.",
+        "education": "Secondary / high school",
+        "license": "Not required for current work (applicant checked).",
+        "fallback": "Current employment and household savings.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "E04",
+        "certainty": "Applicant statement"
+      }
+    ],
+    "applications": [],
+    "support": {
+      "status": "Formal affidavit available",
+      "details": "U.S. spouse commits to household living costs and housing. No promised cash is added to the accessible-savings subtotal.",
+      "capacity": "Fictional spouse employment/pay records and a prepared Form I-864 are listed for review under the applicable official instructions.",
+      "factDate": "2026-10-17",
+      "source": "Fictional teaching example",
+      "refs": "E04,E05",
+      "certainty": "Applicant statement"
+    },
+    "insurance": {
+      "status": "Inquiry sent; quote pending",
+      "plan": "Spouse has asked the employer benefits team about adding the arriving applicant. Eligibility and network are not yet confirmed.",
+      "premium": "200",
+      "terms": "USD 200 monthly planning estimate only; no written quote yet. Deductible and out-of-pocket maximum unknown.",
+      "dates": "No confirmed effective date. Enrollment conditions need written confirmation.",
+      "care": "Savings are the proposed fallback for a gap. A specific gap-cost plan still needs work.",
+      "factDate": "2026-10-17",
+      "source": "Fictional teaching example",
+      "refs": "E06",
+      "certainty": "Estimate"
+    },
+    "budget": {
+      "rent": "2200",
+      "utilities": "350",
+      "food": "500",
+      "transport": "300",
+      "insurance": "200",
+      "health": "100",
+      "care": "0",
+      "debt": "0",
+      "other": "550",
+      "arrival": "3000",
+      "reserve": "6000",
+      "basis": "Fictional household estimate. Insurance is provisional. Current/future income is excluded from the conservative savings calculation.",
+      "factDate": "2026-10-17",
+      "source": "Fictional teaching example",
+      "refs": "E03,E06,E07",
+      "certainty": "Estimate"
+    },
+    "benefits": {
+      "status": "None reported by applicant",
+      "details": "No U.S. public benefits reported in this fictional example. No legal conclusion is made.",
+      "factDate": "2026-10-17",
+      "source": "Fictional teaching example",
+      "refs": "",
+      "certainty": "Applicant statement"
+    },
+    "evidence": [
+      {
+        "id": "E01",
+        "title": "Fictional savings statement",
+        "date": "2026-10-01",
+        "status": "Available",
+        "supports": "Balance and ownership of Savings A.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E02",
+        "title": "Fictional family document index",
+        "date": "2026-10-01",
+        "status": "Available",
+        "supports": "Household and spouse relationship.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E03",
+        "title": "Fictional lease / housing commitment",
+        "date": "2026-10-01",
+        "status": "Available",
+        "supports": "Housing plan and monthly rent.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E04",
+        "title": "Fictional spouse employment/pay records",
+        "date": "2026-10-01",
+        "status": "Available",
+        "supports": "Existing work and support capacity.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E05",
+        "title": "Fictional Form I-864 for review",
+        "date": "2026-10-01",
+        "status": "Available",
+        "supports": "Support commitment; applicability follows official instructions.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E06",
+        "title": "Fictional insurance inquiry",
+        "date": "2026-10-01",
+        "status": "Requested",
+        "supports": "Request for written eligibility, premium and start-date information; no quote obtained.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E07",
+        "title": "Fictional living-cost worksheet",
+        "date": "2026-10-01",
+        "status": "Available",
+        "supports": "Monthly costs and arrival estimates.",
+        "factDate": "2026-10-17",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      }
+    ]
+  }
+}

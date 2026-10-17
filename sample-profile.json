@@ -1,0 +1,420 @@
+{
+  "version": 1,
+  "sample": true,
+  "sections": {
+    "case": {
+      "name": "Example Applicant",
+      "category": "E21 / EB-2 NIW \u2014 National Interest Waiver",
+      "stage": "Waiting for another interview",
+      "post": "Example U.S. consular post",
+      "interview": "2026-12-01",
+      "notice": "Example 221(g) public-charge reinterview request; no real notice supplied.",
+      "asof": "2026-10-16",
+      "factDate": "2026-10-16",
+      "source": "Fictional teaching example",
+      "refs": "E01",
+      "certainty": "Applicant statement"
+    },
+    "household": {
+      "members": "Alias: Adult A; Relationship: Applicant; Age (years): 38; Moving to U.S.?: Accompanying now; Dependent?: No\nAlias: Adult B; Relationship: Spouse / partner; Age (years): 37; Moving to U.S.?: Accompanying now; Dependent?: Yes\nAlias: Child A; Relationship: Child; Age (years): 4; Moving to U.S.?: Accompanying now; Dependent?: Yes\nAlias: Child B; Relationship: Child; Age (years): 2; Moving to U.S.?: Accompanying now; Dependent?: Yes",
+      "adults": "2",
+      "care": "Care: Licensed childcare; Care status: Searching / applying; Care notes: Initial six months; costs included in budget.",
+      "factDate": "2026-10-16",
+      "source": "Fictional teaching example",
+      "refs": "E02",
+      "certainty": "Applicant statement",
+      "_guided": {
+        "members": [
+          {
+            "alias": "Adult A",
+            "relationship": "Applicant",
+            "age": "38",
+            "move": "Accompanying now",
+            "support": "No"
+          },
+          {
+            "alias": "Adult B",
+            "relationship": "Spouse / partner",
+            "age": "37",
+            "move": "Accompanying now",
+            "support": "Yes"
+          },
+          {
+            "alias": "Child A",
+            "relationship": "Child",
+            "age": "4",
+            "move": "Accompanying now",
+            "support": "Yes"
+          },
+          {
+            "alias": "Child B",
+            "relationship": "Child",
+            "age": "2",
+            "move": "Accompanying now",
+            "support": "Yes"
+          }
+        ],
+        "care": [
+          {
+            "person": "",
+            "type": "Licensed childcare",
+            "status": "Searching / applying",
+            "detail": "Initial six months; costs included in budget."
+          }
+        ]
+      }
+    },
+    "housing": {
+      "location": "City: Urbana; State / territory: Illinois; ZIP code: 61801; County: Champaign County",
+      "arrival": "2027-01-15",
+      "status": "Searching",
+      "plan": "Home type: House; Household capacity: Not yet known; Stay duration: 7\u201312 months; Fallback: Stay with family / friend; Area / notes: Three-bedroom rental near transit; no lease signed. Family host up to 30 days.",
+      "cost": "1900",
+      "factDate": "2026-10-16",
+      "source": "Fictional teaching example",
+      "refs": "E03",
+      "certainty": "Estimate",
+      "_guided": {
+        "location": [
+          {
+            "city": "Urbana",
+            "state": "Illinois",
+            "zip": "61801",
+            "county": "Champaign County"
+          }
+        ],
+        "plan": [
+          {
+            "type": "House",
+            "capacity": "Not yet known",
+            "duration": "7\u201312 months",
+            "fallback": "Stay with family / friend",
+            "detail": "Three-bedroom rental near transit; no lease signed. Family host up to 30 days."
+          }
+        ]
+      }
+    },
+    "funds": [
+      {
+        "label": "Settlement savings",
+        "owner": "Owner: Joint: applicant and spouse; Household share: 100%; Access authority: All required owners consent",
+        "balance": "52000",
+        "currency": "USD",
+        "available": "52000",
+        "rate": "1",
+        "fxdate": "2026-10-16",
+        "fxsource": "USD account; no conversion",
+        "date": "2026-10-01",
+        "restrictions": "Restriction: None reported by applicant; Deposit source: No recent unusual deposits reported; Access timing: Available now; Notes: No borrowing reported.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "E04",
+        "certainty": "Document-supported (applicant checked)",
+        "_guided": {
+          "owner": [
+            {
+              "owner": "Joint: applicant and spouse",
+              "share": "100%",
+              "access": "All required owners consent"
+            }
+          ],
+          "restrictions": [
+            {
+              "restriction": "None reported by applicant",
+              "origin": "No recent unusual deposits reported",
+              "timing": "Available now",
+              "detail": "No borrowing reported."
+            }
+          ]
+        }
+      },
+      {
+        "label": "Relocation checking",
+        "owner": "Owner: Applicant; Household share: 100%; Access authority: Sole authority",
+        "balance": "12000",
+        "currency": "EUR",
+        "available": "8000",
+        "rate": "1.09",
+        "fxdate": "2026-09-30",
+        "fxsource": "Applicant-entered reference rate; verify on transfer date",
+        "date": "2026-09-30",
+        "restrictions": "Restriction: None reported by applicant; Deposit source: No recent unusual deposits reported; Access timing: Available now; Notes: EUR 4000 reserved abroad; only EUR 8000 counted.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "E11",
+        "certainty": "Applicant statement",
+        "_guided": {
+          "owner": [
+            {
+              "owner": "Applicant",
+              "share": "100%",
+              "access": "Sole authority"
+            }
+          ],
+          "restrictions": [
+            {
+              "restriction": "None reported by applicant",
+              "origin": "No recent unusual deposits reported",
+              "timing": "Available now",
+              "detail": "EUR 4000 reserved abroad; only EUR 8000 counted."
+            }
+          ]
+        }
+      }
+    ],
+    "assets": {
+      "assets": "Retirement account: USD 18000, not counted as settlement cash. Used vehicle: estimated USD 14000, not counted as liquid cash.",
+      "debts": "Auto loan: USD 6000 remaining; monthly payment is included in the budget.",
+      "sale": "No sale proceeds included in the runway calculation.",
+      "factDate": "2026-10-16",
+      "source": "Fictional teaching example",
+      "refs": "E05",
+      "certainty": "Applicant statement"
+    },
+    "work": [
+      {
+        "person": "Adult A",
+        "status": "Seeking work",
+        "employment": "Research scientist outside the U.S.; current income continues until relocation.",
+        "search": "Applied to three materials-science research roles; no U.S. offer asserted.",
+        "education": "Doctorate in physics; transcripts and credential evaluation available.",
+        "license": "No occupational license expected for the planned research roles; verify employer requirements.",
+        "fallback": "Settlement savings and sponsor support cover the period before paid work begins.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "E06",
+        "certainty": "Document-supported (applicant checked)"
+      },
+      {
+        "person": "Adult B",
+        "status": "Not planning to work",
+        "employment": "Will manage childcare during the initial settlement period.",
+        "search": "No job search currently planned.",
+        "education": "Master's degree in education.",
+        "license": "No U.S. license relied on in the first-year plan.",
+        "fallback": "Household budget relies on savings and Adult A's planned employment.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "E07",
+        "certainty": "Applicant statement"
+      }
+    ],
+    "applications": [
+      {
+        "person": "Adult A",
+        "employer": "Example research institute",
+        "role": "Research scientist / EX-101",
+        "date": "2026-10-01",
+        "status": "Acknowledged",
+        "next": "Await the employer response; no offer asserted.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "E06",
+        "certainty": "Applicant statement"
+      }
+    ],
+    "support": {
+      "status": "Written commitment",
+      "details": "U.S. relative will provide temporary housing for up to 30 days and up to USD 2000 for emergency settlement costs; no cash has been received.",
+      "capacity": "Signed support letter and supporter income evidence are indexed; applicability of any affidavit depends on the visa category and consular instructions.",
+      "factDate": "2026-10-16",
+      "source": "Fictional teaching example",
+      "refs": "E08",
+      "certainty": "Document-supported (applicant checked)"
+    },
+    "insurance": {
+      "status": "Written quote received",
+      "plan": "ACA-compliant family plan; all four members listed; network includes Urbana-area providers subject to plan confirmation.",
+      "premium": "1125",
+      "terms": "Deductible USD 6000 family; out-of-pocket maximum USD 12000 family; full-market-rate estimate; subsidy not assumed.",
+      "dates": "Quote dated 2026-09-23; proposed effective date after admission; enrollment remains conditional.",
+      "care": "Emergency reserve includes USD 150 monthly out-of-pocket health reserve.",
+      "factDate": "2026-10-16",
+      "source": "Fictional teaching example",
+      "refs": "E09",
+      "certainty": "Document-supported (applicant checked)"
+    },
+    "budget": {
+      "rent": "1900",
+      "utilities": "320",
+      "food": "950",
+      "transport": "500",
+      "insurance": "1125",
+      "health": "150",
+      "care": "900",
+      "debt": "300",
+      "other": "350",
+      "arrival": "6500",
+      "reserve": "15000",
+      "basis": "Planning estimate dated 2026-10-16. Housing and insurance use the amounts above; income is excluded from the runway calculation.",
+      "factDate": "2026-10-16",
+      "source": "Fictional teaching example",
+      "refs": "E03,E09",
+      "certainty": "Estimate"
+    },
+    "benefits": {
+      "status": "None reported by applicant",
+      "details": "No U.S. public benefits received by the household are reported in this fictional example. This is not a legal conclusion and does not advise anyone to avoid needed benefits.",
+      "factDate": "2026-10-16",
+      "source": "Fictional teaching example",
+      "refs": "E10",
+      "certainty": "Applicant statement"
+    },
+    "evidence": [
+      {
+        "id": "E01",
+        "title": "Fictional reinterview notice",
+        "date": "2026-09-01",
+        "status": "Available",
+        "supports": "Interview request and requested public-charge clarification.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E02",
+        "title": "Fictional household civil-document index",
+        "date": "2026-08-15",
+        "status": "Available",
+        "supports": "Household composition and ages.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E03",
+        "title": "Fictional housing search and budget worksheet",
+        "date": "2026-10-16",
+        "status": "Available",
+        "supports": "Location, housing status and monthly estimate.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Estimate"
+      },
+      {
+        "id": "E04",
+        "title": "Fictional bank statement summary",
+        "date": "2026-10-01",
+        "status": "Available",
+        "supports": "Settlement savings balance and access.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Document-supported (applicant checked)"
+      },
+      {
+        "id": "E05",
+        "title": "Fictional asset and liability worksheet",
+        "date": "2026-10-16",
+        "status": "Available",
+        "supports": "Retirement account, vehicle and auto loan.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E06",
+        "title": "Fictional Adult A CV and job-search log",
+        "date": "2026-10-16",
+        "status": "Available",
+        "supports": "Education, employment and job search.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Document-supported (applicant checked)"
+      },
+      {
+        "id": "E07",
+        "title": "Fictional Adult B education record",
+        "date": "2026-10-16",
+        "status": "Available",
+        "supports": "Education and non-working plan.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Document-supported (applicant checked)"
+      },
+      {
+        "id": "E08",
+        "title": "Fictional family support letter",
+        "date": "2026-09-20",
+        "status": "Available",
+        "supports": "Temporary housing and emergency support commitment.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Document-supported (applicant checked)"
+      },
+      {
+        "id": "E09",
+        "title": "Fictional health insurance quote",
+        "date": "2026-09-23",
+        "status": "Available",
+        "supports": "Premium, network and cost-sharing assumptions.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Document-supported (applicant checked)"
+      },
+      {
+        "id": "E10",
+        "title": "Fictional benefits history statement",
+        "date": "2026-10-16",
+        "status": "Available",
+        "supports": "Applicant-reported public-benefits history.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E11",
+        "title": "Fictional EUR account statement",
+        "date": "2026-09-30",
+        "status": "Available",
+        "supports": "Second account balance, currency and accessible share.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E12",
+        "title": "Fictional transfer-policy note",
+        "date": "2026-10-01",
+        "status": "Requested",
+        "supports": "Transfer timing and reserved amount for the EUR account.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Applicant statement"
+      },
+      {
+        "id": "E13",
+        "title": "Fictional medical-cost worksheet",
+        "date": "2026-10-16",
+        "status": "Available",
+        "supports": "Health reserve and deductible planning.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Estimate"
+      },
+      {
+        "id": "E14",
+        "title": "Fictional first-year settlement checklist",
+        "date": "2026-10-16",
+        "status": "Available",
+        "supports": "Arrival, deposits, childcare and contingency planning.",
+        "factDate": "2026-10-16",
+        "source": "Fictional teaching example",
+        "refs": "",
+        "certainty": "Estimate"
+      }
+    ]
+  }
+}

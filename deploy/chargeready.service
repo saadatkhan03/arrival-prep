@@ -1,0 +1,29 @@
+[Unit]
+Description=ChargeReady application
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=chargeready
+Group=chargeready
+WorkingDirectory=/opt/chargeready
+EnvironmentFile=/etc/chargeready/production.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/chargeready/.venv/bin/python /opt/chargeready/server.py
+Restart=on-failure
+RestartSec=5
+UMask=0077
+StateDirectory=chargeready
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/chargeready
+CapabilityBoundingSet=
+RestrictSUIDSGID=true
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target
